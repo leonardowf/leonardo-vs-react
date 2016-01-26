@@ -21,4 +21,6 @@ http://developer.telerik.com/featured/5-steps-for-learning-react-application-dev
 - http://spencerdixon.com/blog/test-driven-react-tutorial.html
 - https://egghead.io/series/react-testing-cookbook
 
+# Lists
+- https://medium.com/@sapegin/react-and-redux-single-page-applications-resources-22cd859b0c1d
 
