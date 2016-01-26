@@ -13,3 +13,12 @@ http://developer.telerik.com/featured/5-steps-for-learning-react-application-dev
 - https://code-cartoons.com/a-cartoon-intro-to-redux-3afb775501a6
 - https://code-cartoons.com/a-cartoon-intro-to-facebook-s-relay-part-1-3ec1a127bca5
 
+# Best Practices
+- https://blog.risingstack.com/react-js-best-practices-for-2016/
+- https://github.com/airbnb/javascript/tree/master/react
+
+# Tests
+- http://spencerdixon.com/blog/test-driven-react-tutorial.html
+- https://egghead.io/series/react-testing-cookbook
+
+
