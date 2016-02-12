@@ -1,0 +1,17 @@
+:global {
+  @import 'base';
+  @import 'vendor/bourbon/bourbon';
+  @import 'vendor/neat/neat';
+  @import "vendor/base/base";
+
+  @import "vendor/neat/neat-helpers";
+
+  #root {
+    @include outer-container;
+  }
+
+  section {
+    aside { @include span-columns(4); }
+    article { @include span-columns(8); }
+  }
+}
