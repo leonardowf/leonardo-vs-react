@@ -1,17 +1,120 @@
-:global {
-  @import 'base';
-  @import 'vendor/bourbon/bourbon';
-  @import 'vendor/neat/neat';
-  @import "vendor/base/base";
+  :global {
+    @import 'base';
+    @import 'vendor/bourbon/bourbon';
+    @import 'vendor/neat/neat';
+    @import "vendor/base/base";
 
-  @import "vendor/neat/neat-helpers";
+    @import "vendor/neat/neat-helpers";
 
-  #root {
-    @include outer-container;
+    // Some best-practice CSS that's useful for most apps
+    // Just remove them if they're not what you want
+    html {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+
+    @mixin centerer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #root {
+      @include outer-container(50%);
+      height: 100%;
+      position: relative;
+    }
+
+    .box {
+      @include centerer;
+      background-color: #fff;
+      border: 1px solid #dcdcdc;
+    }
+
+    .accordion-tabs-minimal {
+      $base-border-color: #dcdcdc !default;
+      $base-background-color: #fff !default;
+      $base-spacing: 1.5em !default;
+      $action-color: #477dca !default;
+      $dark-gray: #333 !default;
+      $medium-screen: em(640) !default;
+      $tab-link-color: $dark-gray;
+      $tab-border: 1px solid $base-border-color;
+      $tab-active-background: $base-background-color;
+      $tab-inactive-color: $base-background-color;
+      $tab-inactive-hover-color: #c0c0c0;
+      $tab-mode: $medium-screen;
+
+      @include clearfix;
+      line-height: 1.5;
+      padding: 0;
+
+      .tab-header-and-content {
+        list-style: none;
+
+        @include media($tab-mode) {
+          display: inline;
+        }
+      }
+
+      .tab-link {
+        background-color: $tab-inactive-color;
+        border-top: $tab-border;
+        color: $tab-link-color;
+        display: block;
+        padding: ($base-spacing / 2) $gutter;
+        text-decoration: none;
+
+          @include media($tab-mode) {
+            border-top: 0;
+            display: inline-block;
+          }
+
+          &:hover {
+            color: $action-color;
+          }
+
+          &:focus {
+            outline: none;
+          }
+
+        &.is-active {
+          border-bottom: 0;
+
+          @include media($tab-mode) {
+            border: $tab-border;
+            border-bottom-color: $tab-active-background;
+            margin-bottom: -1px;
+          }
+        }
+      }
+
+      .tab-content {
+        display: none;
+        padding: $base-spacing $gutter;
+        width: 100%;
+
+        @include media($tab-mode) {
+          border-top: $tab-border;
+          float: left;
+        }
+      }
+
+      .is-open {
+        display: inline;
+      }
+    }
   }
-
-  section {
-    aside { @include span-columns(4); }
-    article { @include span-columns(8); }
-  }
-}
