@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import { reduxForm } from 'redux-form'
 
 const LOGIN_TAB = 'LOGIN_TAB'
 const SIGNUP_TAB = 'SIGNUP_TAB'
 
-export default class LoginView extends Component {
+class LoginView extends Component {
   constructor (props) {
     super(props)
 
@@ -30,7 +31,13 @@ export default class LoginView extends Component {
     return 'tab-content'
   }
 
+  onSubmitLogin(loginProps) {
+    console.log(loginProps)
+  }
+
   render () {
+    const {fields: {email, password}, handleSubmit} = this.props
+
     return (
       <div className='box'>
         <ul className='accordion-tabs-minimal'>
@@ -39,11 +46,11 @@ export default class LoginView extends Component {
               Login
             </a>
             <div className={this.tabContentClass(LOGIN_TAB)}>
-              <form>
-                <input type='text' placeholder='E-mail'>
+              <form onSubmit={handleSubmit(this.onSubmitLogin.bind(this))}>
+                <input type='text' placeholder='E-mail' {...email}>
                 </input>
 
-                <input type='password' placeholder='Senha'>
+                <input type='password' placeholder='Senha' {...password}>
                 </input>
 
                 <button type='submit'>Entrar</button>
@@ -74,3 +81,10 @@ export default class LoginView extends Component {
     )
   }
 }
+
+LoginView = reduxForm({ // <----- THIS IS THE IMPORTANT PART!
+  form: 'LoginViewForm',                           // a unique name for this form
+  fields: ['email', 'password'] // all the fields in your form
+})(LoginView)
+
+export default LoginView
