@@ -4,12 +4,14 @@ import thunk from 'redux-thunk'
 import reduxPromise from 'redux-promise'
 import rootReducer from './rootReducer'
 
+import authTokenMiddleware from './middlewares/authTokenMiddleware'
+
 export default function configureStore ({ initialState = {}, history }) {
   // Sync with router via history instance (main.js)
   const routerMiddleware = syncHistory(history)
 
   // Compose final middleware and use devtools in debug environment
-  let middleware = applyMiddleware(thunk, routerMiddleware, reduxPromise)
+  let middleware = applyMiddleware(thunk, routerMiddleware, authTokenMiddleware, reduxPromise)
   if (__DEBUG__) {
     const devTools = window.devToolsExtension
       ? window.devToolsExtension()

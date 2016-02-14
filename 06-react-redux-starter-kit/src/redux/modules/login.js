@@ -1,7 +1,7 @@
 import humps from 'humps'
 
-const LOGIN = 'LOGIN'
-const SIGNUP = 'SIGNUP'
+export const LOGIN = 'LOGIN'
+export const SIGNUP = 'SIGNUP'
 
 import axios from 'axios'
 
@@ -44,14 +44,37 @@ export const actions = {
   signup
 }
 
+// action handlers
+const signupActionHandler = (state, action) => {
+  console.log('signupActionHandler')
+
+  if (action.error) {
+    console.log('signup falhou bro')
+  } else {
+    console.log('signup deu super certo bro')
+  }
+
+  return state
+}
+
+const loginActionHandler = (state, action) => {
+  console.log('loginActionHandler')
+  return state
+}
+
+const ACTION_HANDLERS = {
+  [LOGIN]: loginActionHandler,
+  [SIGNUP]: signupActionHandler
+}
+
 // Reducer
 
 const INITIAL_STATE = {token: null, user_id: null, user_email: null}
 
 const loginReducer = (state = INITIAL_STATE, action) => {
-  console.log('no reducer: ')
-  console.log(action)
-  return state
+  const handler = ACTION_HANDLERS[action.type]
+
+  return handler ? handler(state, action) : state
 }
 
 export default loginReducer
