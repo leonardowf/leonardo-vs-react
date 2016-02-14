@@ -17,26 +17,6 @@ class LoginView extends Component {
     return tabType === this.state.activeTab
   }
 
-  tabClass (tabType) {
-    if (this.isActive(tabType)) {
-      return 'tab-link is-active'
-    }
-
-    return 'tab-link'
-  }
-
-  tabContentClass (tabType) {
-    if (this.isActive(tabType)) {
-      return 'tab-content is-open'
-    }
-
-    return 'tab-content'
-  }
-
-  onSubmitLogin (loginProps) {
-    console.log(loginProps)
-  }
-
   onSelectTab (tabType) {
     this.setState({activeTab: tabType})
   }

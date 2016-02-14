@@ -1,12 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 
+import { actions as loginActions } from '../../redux/modules/login'
+
 class LoginTabForm extends Component {
   static propTypes = {
     isSelected: PropTypes.bool.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired
   };
 
   tabClass () {
@@ -25,7 +28,7 @@ class LoginTabForm extends Component {
   }
 
   onSubmitLogin (loginProps) {
-    console.log(loginProps)
+    this.props.login(loginProps)
   }
 
   render () {
@@ -54,4 +57,4 @@ class LoginTabForm extends Component {
 export default reduxForm({ // <----- THIS IS THE IMPORTANT PART!
   form: 'LoginTabForm',                           // a unique name for this form
   fields: ['email', 'password'] // all the fields in your form
-})(LoginTabForm)
+}, null, loginActions)(LoginTabForm)

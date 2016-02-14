@@ -1,12 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 
+import { actions as loginActions } from '../../redux/modules/login'
+
 class SignupTabForm extends Component {
   static propTypes = {
     isSelected: PropTypes.bool.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    signup: PropTypes.func.isRequired
   };
 
   tabClass () {
@@ -24,12 +27,12 @@ class SignupTabForm extends Component {
     return 'tab-content'
   }
 
-  onSubmitSignup (loginProps) {
-    console.log(loginProps)
+  onSubmitSignup (signupProps) {
+    this.props.signup(signupProps)
   }
 
   render () {
-    const {fields: {companyName, email, password}, handleSubmit} = this.props
+    const {fields: {name, email, password}, handleSubmit} = this.props
     return (
       <li className='tab-header-and-content'>
         <a href='#' className={this.tabClass()} onClick={this.props.onClick}>
@@ -37,7 +40,7 @@ class SignupTabForm extends Component {
         </a>
         <div className={this.tabContentClass()}>
           <form onSubmit={handleSubmit(this.onSubmitSignup.bind(this))}>
-            <input type='text' placeholder='Nome da pizzaria' {...companyName}>
+            <input type='text' placeholder='Nome da pizzaria' {...name}>
             </input>
 
             <input type='text' placeholder='E-mail' {...email}>
@@ -56,5 +59,5 @@ class SignupTabForm extends Component {
 
 export default reduxForm({ // <----- THIS IS THE IMPORTANT PART!
   form: 'SignupTabForm',                           // a unique name for this form
-  fields: ['companyName', 'email', 'password'] // all the fields in your form
-})(SignupTabForm)
+  fields: ['name', 'email', 'password'] // all the fields in your form
+}, null, loginActions)(SignupTabForm)
