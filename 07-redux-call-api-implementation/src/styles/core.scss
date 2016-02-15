@@ -1,0 +1,36 @@
+  :global {
+    @import 'base';
+    @import 'vendor/bourbon/bourbon';
+    @import 'vendor/neat/neat';
+    @import "vendor/base/base";
+
+    @import "vendor/neat/neat-helpers";
+    @import "mixins/centerer";
+
+    @import "views/LoginView";
+
+    // Some best-practice CSS that's useful for most apps
+    // Just remove them if they're not what you want
+    html {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+
+    #root {
+      @include outer-container(100%);
+      height: 100%;
+      position: relative;
+    }
+  }
