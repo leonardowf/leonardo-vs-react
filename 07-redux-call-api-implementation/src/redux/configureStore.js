@@ -1,16 +1,25 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import { syncHistory } from 'react-router-redux'
 import thunk from 'redux-thunk'
+import ls from 'local-storage'
 
-import rootReducer from './rootReducer'
 import callApi from './middlewares/callApi'
+import credentialPersisterMiddleware from './middlewares/credentialPersisterMiddleware'
+import rootReducer from './rootReducer'
 
 export default function configureStore ({ initialState = {}, history }) {
   // Sync with router via history instance (main.js)
   const routerMiddleware = syncHistory(history)
 
+  const persistedLogin = ls('login')
+  if (persistedLogin !== null) {
+    initialState = {
+      login: {...persistedLogin }
+    }
+  }
+
   // Compose final middleware and use devtools in debug environment
-  let middleware = applyMiddleware(thunk, routerMiddleware, callApi)
+  let middleware = applyMiddleware(thunk, routerMiddleware, callApi, credentialPersisterMiddleware)
   if (__DEBUG__) {
     const devTools = window.devToolsExtension
       ? window.devToolsExtension()

@@ -28,17 +28,12 @@ class LoginView extends Component {
   }
 
   componentWillReceiveProps (newProps) {
-    console.log('new props: ')
-    console.log(newProps)
-
     if (newProps.login.token && newProps.login.email) {
       this.props.push('/home')
     }
   }
 
   render () {
-    console.log(this.props)
-
     return (
       <div className='box'>
         <ul className='accordion-tabs-minimal'>

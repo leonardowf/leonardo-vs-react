@@ -8,9 +8,9 @@ export function requireAuthentication (Component) {
     static propTypes = {
       token: PropTypes.string,
       email: PropTypes.string,
-      redirectAfterLogin: PropTypes.func.isRequired,
-      location: PropTypes.string.isRequired,
-      push: PropTypes.func.isRequired,
+      redirectAfterLogin: PropTypes.func,
+      location: PropTypes.object.isRequired,
+      push: PropTypes.func,
       dispatch: PropTypes.func.isRequired
     };
 
