@@ -64,9 +64,16 @@ const signupActionHandler = (state, action) => {
 }
 
 const loginActionHandler = (state, action) => {
-  console.log('loginActionHandler')
   console.log(action)
-  return state
+
+  const {email, authenticationToken, id} = action.payload
+
+  return {
+    ...state,
+    email,
+    id,
+    token: authenticationToken
+  }
 }
 
 const loginFailureActionHandler = (state, action) => {
@@ -83,7 +90,7 @@ const ACTION_HANDLERS = {
 
 // Reducer
 
-const INITIAL_STATE = {token: null, user_id: null, user_email: null}
+const INITIAL_STATE = {token: null, email: null, id: null}
 
 const loginReducer = (state = INITIAL_STATE, action) => {
   const handler = ACTION_HANDLERS[action.type]

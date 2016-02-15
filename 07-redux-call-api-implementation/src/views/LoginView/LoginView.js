@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { routeActions } from 'react-router-redux'
 
 import LoginTabForm from './LoginTabForm'
 import SignupTabForm from './SignupTabForm'
@@ -7,6 +9,10 @@ const LOGIN_TAB = 'LOGIN_TAB'
 const SIGNUP_TAB = 'SIGNUP_TAB'
 
 class LoginView extends Component {
+  static propTypes = {
+    push: PropTypes.func.isRequired
+  };
+
   constructor (props) {
     super(props)
 
@@ -21,7 +27,18 @@ class LoginView extends Component {
     this.setState({activeTab: tabType})
   }
 
+  componentWillReceiveProps (newProps) {
+    console.log('new props: ')
+    console.log(newProps)
+
+    if (newProps.login.token && newProps.login.email) {
+      this.props.push('/home')
+    }
+  }
+
   render () {
+    console.log(this.props)
+
     return (
       <div className='box'>
         <ul className='accordion-tabs-minimal'>
@@ -39,4 +56,8 @@ class LoginView extends Component {
   }
 }
 
-export default LoginView
+function mapStateToProps ({login}) {
+  return { login }
+}
+
+export default connect(mapStateToProps, routeActions)(LoginView)
