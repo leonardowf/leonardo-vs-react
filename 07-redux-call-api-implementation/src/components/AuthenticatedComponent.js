@@ -36,7 +36,7 @@ export function requireAuthentication (Component) {
 
     render () {
       return (
-        <div>
+        <div style={{height: '100%'}}>
           {this.isAuthenticated() === true
             ? <Component {...this.props}/>
           : <div>please login</div>

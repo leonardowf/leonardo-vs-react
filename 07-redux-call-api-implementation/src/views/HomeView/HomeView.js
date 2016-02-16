@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import { actions as counterActions } from '../../redux/modules/counter'
+
+import MenuItem from '../MenuView/MenuItem'
+import TopHeaderView from '../MenuView/TopHeaderView'
+
 import DuckImage from './Duck.jpg'
-import classes from './HomeView.scss'
 
 // We define mapStateToProps where we'd normally use
 // the @connect decorator so the data requirements are clear upfront, but then
@@ -22,29 +24,16 @@ export class HomeView extends React.Component {
 
   render () {
     return (
-      <div className='container text-center'>
-        <div className='row'>
-          <div className='col-xs-2 col-xs-offset-5'>
-            <img className={classes.duck}
-              src={DuckImage}
-              alt='This is a duck, because Redux.' />
+      <div style={{height: '100%'}}>
+        <TopHeaderView />
+        <div className='below-menu'>
+          <div className='left-menu'>
+            <MenuItem image={DuckImage} name={'Cadastro de tamanhos'}/>
+            <MenuItem image={DuckImage} name={'OI de tamanhos'}/>
+            <MenuItem image={DuckImage} name={'Cadastro de tamanhos'}/>
           </div>
+          <div>heuheuheuheuehuheuehuehue</div>
         </div>
-        <h1>Welcome to the React Redux Starter Kit</h1>
-        <h2>
-          Sample Counter:
-          {' '}
-          <span className={classes['counter--green']}>{this.props.counter}</span>
-        </h2>
-        <button className='btn btn-default' onClick={() => this.props.increment(1)}>
-          Increment
-        </button>
-        {' '}
-        <button className='btn btn-default' onClick={this.props.doubleAsync}>
-          Double (Async)
-        </button>
-        <hr />
-        <Link to='/404'>Go to 404 Page</Link>
       </div>
     )
   }

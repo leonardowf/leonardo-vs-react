@@ -14,7 +14,7 @@ export default function configureStore ({ initialState = {}, history }) {
   const persistedLogin = ls('login')
   if (persistedLogin !== null) {
     initialState = {
-      login: {...persistedLogin }
+      login: {...persistedLogin}
     }
   }
 

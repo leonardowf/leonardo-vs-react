@@ -12,7 +12,7 @@ import '../../styles/core.scss'
 // define it with a plain javascript function...
 function CoreLayout ({ children }) {
   return (
-    <div>
+    <div style={{height: '100%'}}>
         {children}
     </div>
   )
