@@ -31,6 +31,7 @@ export class HomeView extends React.Component {
             <MenuItem image={DuckImage} name={'Cadastro de tamanhos'}/>
             <MenuItem image={DuckImage} name={'OI de tamanhos'}/>
             <MenuItem image={DuckImage} name={'Cadastro de tamanhos'}/>
+            <MenuItem image={DuckImage} name={'Cadastro de tamanhos'}/>
           </div>
           <div>heuheuheuheuehuheuehuehue</div>
         </div>
