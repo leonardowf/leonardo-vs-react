@@ -2,6 +2,9 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
 
+import MenuItem from '../views/MenuView/MenuItem'
+import TopHeaderView from '../views/MenuView/TopHeaderView'
+
 export function requireAuthentication (Component) {
   class AuthenticatedComponent extends React.Component {
 
@@ -34,13 +37,31 @@ export function requireAuthentication (Component) {
       }
     }
 
+    renderAuthenticationSuccess () {
+      return (
+        <div style={{height: '100%'}}>
+          <TopHeaderView />
+          <div className='below-menu'>
+            <div className='left-menu'>
+              <MenuItem image='cogs' name='Tamanhos' isSelected={true}/>
+              <MenuItem image='cutlery' name='Sabores' isSelected={false}/>
+            </div>
+            <div>
+              <Component {...this.props} />
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    renderAuthenticationFailure () {
+      return <div>please login</div>
+    }
+
     render () {
       return (
         <div style={{height: '100%'}}>
-          {this.isAuthenticated() === true
-            ? <Component {...this.props}/>
-          : <div>please login</div>
-          }
+          {this.isAuthenticated() === true ? this.renderAuthenticationSuccess() : this.renderAuthenticationFailure()}
         </div>
       )
     }

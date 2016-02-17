@@ -2,9 +2,6 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { actions as counterActions } from '../../redux/modules/counter'
 
-import MenuItem from '../MenuView/MenuItem'
-import TopHeaderView from '../MenuView/TopHeaderView'
-
 // We define mapStateToProps where we'd normally use
 // the @connect decorator so the data requirements are clear upfront, but then
 // export the decorated component after the main class definition so
@@ -23,15 +20,6 @@ export class HomeView extends React.Component {
   render () {
     return (
       <div style={{height: '100%'}}>
-        <TopHeaderView />
-        <div className='below-menu'>
-          <div className='left-menu'>
-            <MenuItem image='cogs' name='Tamanhos' isSelected={true}/>
-            <MenuItem image='cutlery' name='Sabores' isSelected={false}/>
-          </div>
-          <div>
-          </div>
-        </div>
       </div>
     )
   }

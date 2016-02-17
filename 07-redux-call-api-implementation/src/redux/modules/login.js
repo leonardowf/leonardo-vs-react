@@ -1,8 +1,5 @@
 import { CALL_API, POST } from '../middlewares/callApi'
 
-export const LOGIN = 'LOGIN'
-export const SIGNUP = 'SIGNUP'
-
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
@@ -10,6 +7,8 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 export const SIGNUP_REQUEST = 'SIGNUP_REQUEST'
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE'
+
+export const LOGOUT = 'LOGOUT'
 
 export const login = (userProps) => {
   let payload = {
@@ -45,9 +44,14 @@ export const signup = (userProps) => {
   }
 }
 
+export const logout = () => ({
+  type: LOGOUT
+})
+
 export const actions = {
   login,
-  signup
+  signup,
+  logout
 }
 
 // action handlers
@@ -82,15 +86,23 @@ const loginFailureActionHandler = (state, action) => {
   return state
 }
 
+const INITIAL_STATE = {token: null, email: null, id: null}
+
+const logoutHandler = (state, action) => {
+  return {
+    ...state,
+    ...INITIAL_STATE
+  }
+}
+
 const ACTION_HANDLERS = {
   [LOGIN_SUCCESS]: loginActionHandler,
   [LOGIN_FAILURE]: loginFailureActionHandler,
-  [SIGNUP_SUCCESS]: signupActionHandler
+  [SIGNUP_SUCCESS]: signupActionHandler,
+  [LOGOUT]: logoutHandler
 }
 
 // Reducer
-
-const INITIAL_STATE = {token: null, email: null, id: null}
 
 const loginReducer = (state = INITIAL_STATE, action) => {
   const handler = ACTION_HANDLERS[action.type]

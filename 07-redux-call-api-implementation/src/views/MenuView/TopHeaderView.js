@@ -1,10 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { routeActions } from 'react-router-redux'
+import { actions as loginActions } from '../../redux/modules/login'
 
-export default class TopHeaderView extends Component {
+class TopHeaderView extends Component {
+  static propTypes = {
+    logout: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired
+  };
 
   onClickLogout (event) {
-    event.preventDefault()
-    
+    this.props.logout()
+    this.props.push('/')
   }
 
   render () {
@@ -12,7 +19,7 @@ export default class TopHeaderView extends Component {
       <header className='navigation' role='banner'>
         <div className='navigation-wrapper'>
           <a href='javascript:void(0)' className='logo'>
-            <img src='https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png' alt='Logo Image'></img>
+            {/* Logo goes here */}
           </a>
           <a href='javascript:void(0)' className='navigation-menu-button' id='js-mobile-menu'>MENU</a>
 
@@ -21,7 +28,7 @@ export default class TopHeaderView extends Component {
               <ul id='js-navigation-menu' className='navigation-menu show'>
                 <li className='nav-link more'><a href='javascript:void(0)'>More</a>
                   <ul className='submenu'>
-                    <li><a onClick={this.onClickLogout}>Logout</a></li>
+                    <li><a onClick={() => this.onClickLogout()}>Logout</a></li>
                   </ul>
                 </li>
               </ul>
@@ -32,3 +39,5 @@ export default class TopHeaderView extends Component {
     )
   }
 }
+
+export default connect(null, { logout: loginActions.logout, push: routeActions.push })(TopHeaderView)

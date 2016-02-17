@@ -1,5 +1,5 @@
 import ls from 'local-storage'
-import { SIGNUP_SUCCESS, LOGIN_SUCCESS } from '../modules/login'
+import { SIGNUP_SUCCESS, LOGIN_SUCCESS, LOGOUT } from '../modules/login'
 
 export default (store) => (next) => (action) => {
   if (action.type === SIGNUP_SUCCESS || action.type === LOGIN_SUCCESS) {
@@ -11,9 +11,10 @@ export default (store) => (next) => (action) => {
     }
 
     ls('login', toPersist)
+  }
 
-    console.log('persistir!!!')
-    console.log(action.payload)
+  if (action.type === LOGOUT) {
+    ls('login', null)
   }
 
   return next(action)
