@@ -3,8 +3,6 @@ import React, { Component } from 'react'
 export default class TopHeaderView extends Component {
 
   render () {
-    const logo = 'https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_3_dark.png'
-
     return (
       <header className='navigation' role='banner'>
         <div className='navigation-wrapper'>

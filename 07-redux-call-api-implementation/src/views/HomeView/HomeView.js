@@ -5,8 +5,6 @@ import { actions as counterActions } from '../../redux/modules/counter'
 import MenuItem from '../MenuView/MenuItem'
 import TopHeaderView from '../MenuView/TopHeaderView'
 
-import DuckImage from './Duck.jpg'
-
 // We define mapStateToProps where we'd normally use
 // the @connect decorator so the data requirements are clear upfront, but then
 // export the decorated component after the main class definition so
@@ -28,12 +26,11 @@ export class HomeView extends React.Component {
         <TopHeaderView />
         <div className='below-menu'>
           <div className='left-menu'>
-            <MenuItem image={DuckImage} name={'Cadastro de tamanhos'}/>
-            <MenuItem image={DuckImage} name={'OI de tamanhos'}/>
-            <MenuItem image={DuckImage} name={'Cadastro de tamanhos'}/>
-            <MenuItem image={DuckImage} name={'Cadastro de tamanhos'}/>
+            <MenuItem image='cogs' name='Tamanhos' isSelected={true}/>
+            <MenuItem image='cutlery' name='Sabores' isSelected={false}/>
           </div>
-          <div>heuheuheuheuehuheuehuehue</div>
+          <div>
+          </div>
         </div>
       </div>
     )
