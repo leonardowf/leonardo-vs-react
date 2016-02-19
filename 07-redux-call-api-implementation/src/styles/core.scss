@@ -12,6 +12,7 @@
     @import "typography";
     @import "top-menu";
 
+
     $primary: #F39C38;
     $action: #E74C3C;
     $accent: #03A678;
@@ -58,6 +59,7 @@
       width: 150px;
       height: 100%;
       padding-top: 20px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
     .menu-item {
@@ -105,4 +107,9 @@
       background-color: $active-menu-item;
     }
 
+    #{$all-text-inputs} {
+      &.invalid {
+        border: 1px solid red;
+      }
+    }
   }

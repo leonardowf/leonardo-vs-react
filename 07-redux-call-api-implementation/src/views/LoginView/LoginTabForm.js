@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
-
+import validator from 'email-validator'
 import { actions as loginActions } from '../../redux/modules/login'
 
 class LoginTabForm extends Component {
@@ -27,12 +27,52 @@ class LoginTabForm extends Component {
     return 'tab-content'
   }
 
+  fieldEmailClass (emailField) {
+    return ''
+
+    // if (emailField.invalid && emailField.touched) {
+    //   return 'invalid'
+    // }
+    //
+    // return ''
+  }
+
+  fieldPasswordClass (passwordField) {
+    return ''
+    // if (passwordField.invalid && passwordField.touched) {
+    //   return 'invalid'
+    // }
+    //
+    // return ''
+  }
+
+  fieldEmailErrorMessage (emailField) {
+    if (emailField.invalid && emailField.value !== null && emailField.value === '') {
+      return ''
+    }
+
+    if (emailField.invalid && emailField.touched) {
+      return emailField.error
+    }
+
+    return ''
+  }
+
+  fieldPasswordErrorMessage (passwordField) {
+    if (passwordField.invalid && passwordField.touched) {
+      return passwordField.error
+    }
+
+    return ''
+  }
+
   onSubmitLogin (loginProps) {
     this.props.login(loginProps)
   }
 
   render () {
     const {fields: {email, password}, handleSubmit} = this.props
+
     return (
       <li className='tab-header-and-content'>
         <a href='#' className={this.tabClass()} onClick={this.props.onClick}>
@@ -40,13 +80,16 @@ class LoginTabForm extends Component {
         </a>
         <div className={this.tabContentClass()}>
           <form onSubmit={handleSubmit(this.onSubmitLogin.bind(this))}>
-            <input type='text' placeholder='E-mail' {...email}>
+
+            <div>{this.fieldEmailErrorMessage(email)}</div>
+            <input autoFocus className={this.fieldEmailClass(email)} type='text' placeholder='E-mail' {...email}>
             </input>
 
-            <input type='password' placeholder='Senha' {...password}>
+            <div className='password-error'>{this.fieldPasswordErrorMessage(password)}</div>
+            <input className={this.fieldPasswordClass(password)} type='password' placeholder='Senha' {...password}>
             </input>
 
-            <button type='submit'>Entrar</button>
+            <button type='submit' className={this.props.valid ? '' : 'button-disabled'}>Entrar</button>
           </form>
         </div>
       </li>
@@ -54,7 +97,29 @@ class LoginTabForm extends Component {
   }
 }
 
+const validate = (values) => {
+  const errors = {}
+
+  if (!values.email) {
+    errors.email = 'Digite um email :('
+  }
+
+  if (values.email && !validator.validate(values.email)) {
+    errors.email = 'Digite um email válido :('
+  }
+
+  if (!values.password) {
+    errors.password = 'Digite uma senha :('
+  }
+
+  if (values.password && values.password.length < 6) {
+    errors.password = 'A senha não pode ser menor do que 6 caracteres :('
+  }
+
+  return errors;
+}
+
 export default reduxForm({ // <----- THIS IS THE IMPORTANT PART!
   form: 'LoginTabForm',                           // a unique name for this form
-  fields: ['email', 'password'] // all the fields in your form
+  fields: ['email', 'password'], validate // all the fields in your form
 }, null, loginActions)(LoginTabForm)
