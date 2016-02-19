@@ -17,7 +17,6 @@ $tab-mode: $medium-screen;
   border: $tab-border;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 400px;
-  height: 300px;
 }
 
 .accordion-tabs-minimal {
@@ -70,11 +69,6 @@ $tab-mode: $medium-screen;
     padding: $base-spacing $gutter;
     width: 100%;
 
-    form {
-      @include centerer;
-      width: 80%;
-    }
-
     @include media($tab-mode) {
       border-top: $tab-border;
       float: left;
@@ -84,12 +78,4 @@ $tab-mode: $medium-screen;
   .is-open {
     display: inline;
   }
-}
-
-.accordion-tabs-minimal {
-  height: 100%;
-}
-
-.tab-content {
-  height: 100%;
 }
