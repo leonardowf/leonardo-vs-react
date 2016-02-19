@@ -25,6 +25,7 @@ http://developer.telerik.com/featured/5-steps-for-learning-react-application-dev
 - http://jaero.space/blog/react-performance-1/
 - http://jaero.space/blog/react-performance-2/
 - http://www.toptal.com/react/react-redux-and-immutablejs
+- http://blog.nparashuram.com/2016/02/using-webworkers-to-make-react-faster.html
 
 ## Lists
 - https://medium.com/@sapegin/react-and-redux-single-page-applications-resources-22cd859b0c1d
