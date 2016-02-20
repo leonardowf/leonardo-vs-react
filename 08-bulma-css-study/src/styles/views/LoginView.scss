@@ -1,0 +1,32 @@
+$tab-height: 20px;
+
+.box {
+  height: 500px;
+  width: 500px;
+
+  display: block;
+  @include centerer;
+  background-color: white;
+
+}
+
+.root {
+  height: 100%;
+}
+
+.tab-content {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  top: -$tab-height;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-container-bla {
+  width: 80%;
+  position: relative;
+  top: -1 * $tab-height;
+}
