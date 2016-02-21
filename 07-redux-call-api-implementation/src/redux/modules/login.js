@@ -11,6 +11,7 @@ export const SIGNUP_FAILURE = 'SIGNUP_FAILURE'
 export const LOGOUT = 'LOGOUT'
 
 export const RESET_LOGIN_ERRORS = 'RESET_LOGIN_ERRORS'
+export const RESET_SIGNUP_ERRORS = 'RESET_SIGNUP_ERRORS'
 
 export const login = (userProps) => {
   let payload = {
@@ -54,19 +55,42 @@ export const resetLoginErrors = () => ({
   type: RESET_LOGIN_ERRORS
 })
 
+export const resetSignupErrors = () => ({
+  type: RESET_SIGNUP_ERRORS
+})
+
 export const actions = {
   login,
   signup,
   logout,
-  resetLoginErrors
+  resetLoginErrors,
+  resetSignupErrors
 }
 
 // action handlers
 const signupActionHandler = (state, action) => {
+  if (action.type === SIGNUP_REQUEST) {
+    return {
+      ...state,
+      signupErrors: []
+    }
+  }
+
+  if (action.type === SIGNUP_SUCCESS) {
+    const {email, authenticationToken, id} = action.payload.user
+    console.log(action)
+    return {
+      ...state,
+      email,
+      id,
+      token: authenticationToken
+    }
+  }
+
   if (action.error) {
     return {
       ...state,
-      errors: action.payload.data
+      signupErrors: action.payload.data
     }
   } else {
   }
@@ -89,7 +113,7 @@ const loginFailureActionHandler = (state, action) => {
   if (action.error) {
     return {
       ...state,
-      errors: action.payload.data
+      loginErrors: action.payload.data
     }
   }
   return state
@@ -100,10 +124,10 @@ const loadingHandler = (actionHandler, loading) => (state, action) => {
 }
 
 const loginRequestActionHandler = (state, action) => {
-  return {...state, errors: []}
+  return {...state, loginErrors: []}
 }
 
-const INITIAL_STATE = {token: null, email: null, id: null, loading: false, errors: []}
+const INITIAL_STATE = {token: null, email: null, id: null, loading: false, loginErrors: [], signupErrors: []}
 
 const logoutHandler = (state, action) => {
   return {
@@ -114,7 +138,13 @@ const logoutHandler = (state, action) => {
 
 const resetLoginErrorsHandler = (state, action) => {
   return {
-    ...state, errors: []
+    ...state, loginErrors: []
+  }
+}
+
+const resetSignupErrorsHandler = (state, action) => {
+  return {
+    ...state, signupErrors: []
   }
 }
 
@@ -126,7 +156,8 @@ const ACTION_HANDLERS = {
   [SIGNUP_REQUEST]: loadingHandler(signupActionHandler, true),
   [SIGNUP_SUCCESS]: loadingHandler(signupActionHandler, false),
   [LOGOUT]: logoutHandler,
-  [RESET_LOGIN_ERRORS]: resetLoginErrorsHandler
+  [RESET_LOGIN_ERRORS]: resetLoginErrorsHandler,
+  [RESET_SIGNUP_ERRORS]: resetSignupErrorsHandler
 }
 
 // Reducer

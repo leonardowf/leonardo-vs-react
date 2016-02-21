@@ -73,7 +73,7 @@ class LoginTabForm extends Component {
   loginError () {
     var resultError = ''
 
-    if (this.props.loginErrors === null || this.props.loginErrors.length === 0) {
+    if (!this.props.loginErrors || this.props.loginErrors.length === 0) {
       return null
     }
 
@@ -146,7 +146,7 @@ const validate = (values) => {
 function mapStateToProps (state) {
   return {
     isLoading: state.login.loading,
-    loginErrors: state.login.errors
+    loginErrors: state.login.loginErrors
   }
 }
 
