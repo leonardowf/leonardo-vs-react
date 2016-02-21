@@ -2,8 +2,19 @@ import ls from 'local-storage'
 import { SIGNUP_SUCCESS, LOGIN_SUCCESS, LOGOUT } from '../modules/login'
 
 export default (store) => (next) => (action) => {
+  let hash = {}
+
+  if (action.type === SIGNUP_SUCCESS) {
+    hash = action.payload.user
+  }
+
+  if (action.type === LOGIN_SUCCESS) {
+    hash = action.payload
+  }
+
+  const {authenticationToken, email, id} = hash
+
   if (action.type === SIGNUP_SUCCESS || action.type === LOGIN_SUCCESS) {
-    const {authenticationToken, email, id} = action.payload
     const toPersist = {
       token: authenticationToken,
       email,

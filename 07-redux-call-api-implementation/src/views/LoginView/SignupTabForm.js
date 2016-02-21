@@ -124,7 +124,7 @@ const validate = (values) => {
 function mapStateToProps (state) {
   return {
     signupErrors: state.login.signupErrors,
-    isLoading: state.login.isLoading
+    isLoading: state.login.loading
   }
 }
 
