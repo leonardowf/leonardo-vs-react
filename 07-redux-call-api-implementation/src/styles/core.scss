@@ -11,7 +11,7 @@
 
     @import "typography";
     @import "top-menu";
-
+    @import "flashes";
 
     $primary: #F39C38;
     $action: #E74C3C;
@@ -111,5 +111,10 @@
       &.invalid {
         border: 1px solid red;
       }
+    }
+
+    button.is-disabled {
+      pointer-events: none;
+      opacity: 0.5;
     }
   }

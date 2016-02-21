@@ -88,7 +88,8 @@ export default (store) => (next) => (action) => {
     })),
     (response) => next(actionWith({
       type: failureType,
-      response
+      payload: response,
+      error: true
     }))
   )
 }

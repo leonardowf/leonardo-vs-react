@@ -17,7 +17,7 @@ $tab-mode: $medium-screen;
   border: $tab-border;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 400px;
-  height: 300px;
+  height: 350px;
 }
 
 .accordion-tabs-minimal {
@@ -78,6 +78,27 @@ $tab-mode: $medium-screen;
     width: 100%;
     height: calc(100% - 45px);
 
+    .login-alert {
+      background-color: #fbe3e4;
+      display: block;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      color: darken(#fbe3e4, 60%);
+      cursor: pointer;
+      i {
+        float: right;
+        position: relative;
+        top: 4px;
+        right: 10px;
+      }
+
+      span {
+        position: relative;
+        right: -10px;
+      }
+    }
+
     .login-form-container {
       height: 100%;
       width: 100%;
@@ -90,7 +111,6 @@ $tab-mode: $medium-screen;
         width: 80%;
       }
     }
-    // padding: $base-spacing $gutter;
 
     @include media($tab-mode) {
       border-top: $tab-border;

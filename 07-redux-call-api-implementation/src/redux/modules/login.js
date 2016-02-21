@@ -10,6 +10,8 @@ export const SIGNUP_FAILURE = 'SIGNUP_FAILURE'
 
 export const LOGOUT = 'LOGOUT'
 
+export const RESET_LOGIN_ERRORS = 'RESET_LOGIN_ERRORS'
+
 export const login = (userProps) => {
   let payload = {
     user: userProps
@@ -48,28 +50,31 @@ export const logout = () => ({
   type: LOGOUT
 })
 
+export const resetLoginErrors = () => ({
+  type: RESET_LOGIN_ERRORS
+})
+
 export const actions = {
   login,
   signup,
-  logout
+  logout,
+  resetLoginErrors
 }
 
 // action handlers
 const signupActionHandler = (state, action) => {
-  console.log('signupActionHandler')
-
   if (action.error) {
-    console.log('signup falhou bro')
+    return {
+      ...state,
+      errors: action.payload.data
+    }
   } else {
-    console.log('signup deu super certo bro')
   }
 
   return state
 }
 
 const loginActionHandler = (state, action) => {
-  console.log(action)
-
   const {email, authenticationToken, id} = action.payload
 
   return {
@@ -81,12 +86,24 @@ const loginActionHandler = (state, action) => {
 }
 
 const loginFailureActionHandler = (state, action) => {
-  console.log('loginFailureActionHandler')
-  console.log(action)
+  if (action.error) {
+    return {
+      ...state,
+      errors: action.payload.data
+    }
+  }
   return state
 }
 
-const INITIAL_STATE = {token: null, email: null, id: null}
+const loadingHandler = (actionHandler, loading) => (state, action) => {
+  return actionHandler({...state, loading}, action)
+}
+
+const loginRequestActionHandler = (state, action) => {
+  return {...state, errors: []}
+}
+
+const INITIAL_STATE = {token: null, email: null, id: null, loading: false, errors: []}
 
 const logoutHandler = (state, action) => {
   return {
@@ -95,11 +112,21 @@ const logoutHandler = (state, action) => {
   }
 }
 
+const resetLoginErrorsHandler = (state, action) => {
+  return {
+    ...state, errors: []
+  }
+}
+
 const ACTION_HANDLERS = {
-  [LOGIN_SUCCESS]: loginActionHandler,
-  [LOGIN_FAILURE]: loginFailureActionHandler,
-  [SIGNUP_SUCCESS]: signupActionHandler,
-  [LOGOUT]: logoutHandler
+  [LOGIN_REQUEST]: loadingHandler(loginRequestActionHandler, true),
+  [LOGIN_SUCCESS]: loadingHandler(loginActionHandler, false),
+  [LOGIN_FAILURE]: loadingHandler(loginFailureActionHandler, false),
+  [SIGNUP_FAILURE]: loadingHandler(signupActionHandler, false),
+  [SIGNUP_REQUEST]: loadingHandler(signupActionHandler, true),
+  [SIGNUP_SUCCESS]: loadingHandler(signupActionHandler, false),
+  [LOGOUT]: logoutHandler,
+  [RESET_LOGIN_ERRORS]: resetLoginErrorsHandler
 }
 
 // Reducer

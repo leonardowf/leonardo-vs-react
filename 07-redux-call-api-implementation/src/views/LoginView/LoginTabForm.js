@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import validator from 'email-validator'
 import { actions as loginActions } from '../../redux/modules/login'
+import LittleFlashError from '../../components/LittleFlashError'
 
 class LoginTabForm extends Component {
   static propTypes = {
@@ -9,7 +10,10 @@ class LoginTabForm extends Component {
     handleSubmit: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
     onClick: PropTypes.func.isRequired,
-    login: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
+    loginErrors: PropTypes.array.isRequired,
+    resetLoginErrors: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired
   };
 
   tabClass () {
@@ -47,7 +51,7 @@ class LoginTabForm extends Component {
   }
 
   fieldEmailErrorMessage (emailField) {
-    if (emailField.invalid && emailField.value !== null && emailField.value === '') {
+    if (emailField.invalid && emailField.value !== null && emailField.value === '' && !emailField.touched) {
       return ''
     }
 
@@ -66,6 +70,24 @@ class LoginTabForm extends Component {
     return ''
   }
 
+  loginError () {
+    var resultError = ''
+
+    if (this.props.loginErrors === null || this.props.loginErrors.length === 0) {
+      return null
+    }
+
+    for (var error of this.props.loginErrors) {
+      resultError = resultError + '\n' + error
+    }
+
+    return <LittleFlashError message={resultError} onClick={() => this.onClickLoginError()} />
+  }
+
+  onClickLoginError () {
+    this.props.resetLoginErrors()
+  }
+
   onSubmitLogin (loginProps) {
     this.props.login(loginProps)
   }
@@ -79,9 +101,9 @@ class LoginTabForm extends Component {
           Login
         </a>
         <div className={this.tabContentClass()}>
+          {this.loginError()}
           <div className='login-form-container'>
             <form onSubmit={handleSubmit(this.onSubmitLogin.bind(this))}>
-
               <div>{this.fieldEmailErrorMessage(email)}</div>
               <input autoFocus className={this.fieldEmailClass(email)} type='text' placeholder='E-mail' {...email}>
               </input>
@@ -90,7 +112,7 @@ class LoginTabForm extends Component {
               <input className={this.fieldPasswordClass(password)} type='password' placeholder='Senha' {...password}>
               </input>
 
-              <button type='submit' className={this.props.valid ? '' : 'button-disabled'}>Entrar</button>
+              <button type='submit' className={this.props.isLoading ? 'is-disabled' : ''}>Entrar</button>
             </form>
           </div>
         </div>
@@ -102,7 +124,7 @@ class LoginTabForm extends Component {
 const validate = (values) => {
   const errors = {}
 
-  if (!values.email) {
+  if (!values.email || values.email.length === 0) {
     errors.email = 'Digite um email :('
   }
 
@@ -118,10 +140,17 @@ const validate = (values) => {
     errors.password = 'A senha não pode ser menor do que 6 caracteres :('
   }
 
-  return errors;
+  return errors
+}
+
+function mapStateToProps (state) {
+  return {
+    isLoading: state.login.loading,
+    loginErrors: state.login.errors
+  }
 }
 
 export default reduxForm({ // <----- THIS IS THE IMPORTANT PART!
   form: 'LoginTabForm',                           // a unique name for this form
   fields: ['email', 'password'], validate // all the fields in your form
-}, null, loginActions)(LoginTabForm)
+}, mapStateToProps, loginActions)(LoginTabForm)

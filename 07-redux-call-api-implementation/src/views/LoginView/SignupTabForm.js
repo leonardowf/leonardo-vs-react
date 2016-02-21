@@ -50,7 +50,7 @@ class SignupTabForm extends Component {
               <input type='password' placeholder='Senha' {...password}>
               </input>
 
-              <button type='submit'>Entrar</button>
+              <button type='submit'>Registrar</button>
             </form>
           </div>
         </div>
