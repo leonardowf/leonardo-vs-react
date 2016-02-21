@@ -39,18 +39,20 @@ class SignupTabForm extends Component {
           Cadastre-se
         </a>
         <div className={this.tabContentClass()}>
-          <form onSubmit={handleSubmit(this.onSubmitSignup.bind(this))}>
-            <input type='text' placeholder='Nome da pizzaria' {...name}>
-            </input>
+          <div className='login-form-container'>
+            <form onSubmit={handleSubmit(this.onSubmitSignup.bind(this))}>
+              <input type='text' placeholder='Nome da pizzaria' {...name}>
+              </input>
 
-            <input type='text' placeholder='E-mail' {...email}>
-            </input>
+              <input type='text' placeholder='E-mail' {...email}>
+              </input>
 
-            <input type='password' placeholder='Senha' {...password}>
-            </input>
+              <input type='password' placeholder='Senha' {...password}>
+              </input>
 
-            <button type='submit'>Entrar</button>
-          </form>
+              <button type='submit'>Entrar</button>
+            </form>
+          </div>
         </div>
       </li>
     )

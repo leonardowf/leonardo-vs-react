@@ -14,9 +14,9 @@ class LoginTabForm extends Component {
 
   tabClass () {
     if (this.props.isSelected) {
-      return 'tab-link is-active'
+      return 'tab-link is-active first'
     }
-    return 'tab-link'
+    return 'tab-link first'
   }
 
   tabContentClass () {
@@ -79,18 +79,20 @@ class LoginTabForm extends Component {
           Login
         </a>
         <div className={this.tabContentClass()}>
-          <form onSubmit={handleSubmit(this.onSubmitLogin.bind(this))}>
+          <div className='login-form-container'>
+            <form onSubmit={handleSubmit(this.onSubmitLogin.bind(this))}>
 
-            <div>{this.fieldEmailErrorMessage(email)}</div>
-            <input autoFocus className={this.fieldEmailClass(email)} type='text' placeholder='E-mail' {...email}>
-            </input>
+              <div>{this.fieldEmailErrorMessage(email)}</div>
+              <input autoFocus className={this.fieldEmailClass(email)} type='text' placeholder='E-mail' {...email}>
+              </input>
 
-            <div className='password-error'>{this.fieldPasswordErrorMessage(password)}</div>
-            <input className={this.fieldPasswordClass(password)} type='password' placeholder='Senha' {...password}>
-            </input>
+              <div className='password-error'>{this.fieldPasswordErrorMessage(password)}</div>
+              <input className={this.fieldPasswordClass(password)} type='password' placeholder='Senha' {...password}>
+              </input>
 
-            <button type='submit' className={this.props.valid ? '' : 'button-disabled'}>Entrar</button>
-          </form>
+              <button type='submit' className={this.props.valid ? '' : 'button-disabled'}>Entrar</button>
+            </form>
+          </div>
         </div>
       </li>
     )
