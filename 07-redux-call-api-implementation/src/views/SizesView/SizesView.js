@@ -1,10 +1,6 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes, Component } from 'react';
 
-export default class SizesView extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+export default class SizesView extends Component {
   render() {
     return (<div>MyComponent</div>);
   }

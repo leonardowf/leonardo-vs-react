@@ -70,7 +70,7 @@ class SignupTabForm extends Component {
     const {fields: {name, email, password}, handleSubmit} = this.props
     return (
       <li className='tab-header-and-content'>
-        <a href='#' className={this.tabClass()} onClick={this.props.onClick}>
+        <a className={this.tabClass()} onClick={this.props.onClick}>
           Cadastre-se
         </a>
         <div className={this.tabContentClass()}>

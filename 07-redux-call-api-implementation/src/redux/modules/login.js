@@ -127,7 +127,6 @@ const loginRequestActionHandler = (state, action) => {
   return {...state, loginErrors: []}
 }
 
-
 const logoutHandler = (state, action) => {
   return {
     ...state,
@@ -160,7 +159,14 @@ const ACTION_HANDLERS = {
 }
 
 // Reducer
-export const LOGIN_INITIAL_STATE = {token: null, email: null, id: null, loading: false, loginErrors: [], signupErrors: []}
+export const LOGIN_INITIAL_STATE = {
+  token: null,
+  email: null,
+  id: null,
+  loading: false,
+  loginErrors: [],
+  signupErrors: []
+}
 
 const loginReducer = (state = LOGIN_INITIAL_STATE, action) => {
   const handler = ACTION_HANDLERS[action.type]

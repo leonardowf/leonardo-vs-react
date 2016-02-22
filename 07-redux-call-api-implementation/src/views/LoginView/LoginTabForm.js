@@ -97,7 +97,7 @@ class LoginTabForm extends Component {
 
     return (
       <li className='tab-header-and-content'>
-        <a href='#' className={this.tabClass()} onClick={this.props.onClick}>
+        <a className={this.tabClass()} onClick={this.props.onClick}>
           Login
         </a>
         <div className={this.tabContentClass()}>

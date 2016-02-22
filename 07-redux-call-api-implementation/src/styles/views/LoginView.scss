@@ -43,6 +43,7 @@ $tab-mode: $medium-screen;
     display: block;
     padding: ($base-spacing / 2) $gutter;
     text-decoration: none;
+    cursor: pointer;
 
       @include media($tab-mode) {
         border-top: 0;

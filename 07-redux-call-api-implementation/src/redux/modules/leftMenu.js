@@ -1,4 +1,3 @@
-import Enum from 'es6-enum'
 import { UPDATE_LOCATION } from 'react-router-redux'
 import _ from 'lodash'
 
