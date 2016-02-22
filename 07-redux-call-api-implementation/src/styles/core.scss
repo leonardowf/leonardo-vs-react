@@ -3,9 +3,16 @@
     @import 'vendor/bourbon/bourbon';
     @import 'vendor/neat/neat';
     @import "vendor/base/base";
-
     @import "vendor/neat/neat-helpers";
     @import "mixins/centerer";
+
+    $primary: #F39C38;
+    $action: #E74C3C;
+    $accent: #03A678;
+    $light-color: #ECECF0;
+    $medium-blue: #34495E;
+    $text: #353535;
+    $active-menu-item: #282F3B;
 
     @import "views/LoginView";
     @import "views/LoginView";
@@ -15,14 +22,6 @@
     @import "typography";
     @import "top-menu";
     @import "flashes";
-
-    $primary: #F39C38;
-    $action: #E74C3C;
-    $accent: #03A678;
-    $light-color: #ECECF0;
-    $medium-blue: #34495E;
-    $text: #353535;
-    $active-menu-item: #282F3B;
 
     html {
       box-sizing: border-box;
@@ -57,7 +56,7 @@
     .left-menu {
       position: relative;
       background-color: $medium-blue;
-      display: block;
+      display: inline;
       float: left;
       width: 150px;
       height: 100%;
@@ -119,5 +118,13 @@
     button.is-disabled {
       pointer-events: none;
       opacity: 0.5;
+    }
+
+    .component-container {
+      height: 100%;
+      width: calc(100% - 150px);
+      display: inline-block;
+      float: left;
+      padding: 20px;
     }
   }

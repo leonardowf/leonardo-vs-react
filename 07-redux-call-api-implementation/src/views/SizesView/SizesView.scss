@@ -1,0 +1,36 @@
+.sizes-container {
+  background-color: white;
+  padding: 20px;
+  border: 1px solid $medium-blue;
+  margin-bottom: 20px;
+
+  button {
+    margin-right: 10px;
+  }
+
+  td {
+    padding: 10px;
+  }
+
+  @include outer-container;
+  .table-container { @include span-columns(12); }
+}
+
+#{$all-text-inputs} {
+  &.border-less {
+    margin-bottom: 0px;
+  }
+
+  &.editable-row {
+    margin-bottom: 0px;
+    height: 24px;
+  }
+}
+
+.add-form-container {
+  @include outer-container;
+  input { @include span-columns(9);
+    height: 40px;
+  }
+  button { @include span-columns(3); }
+}

@@ -50,7 +50,7 @@ export function requireAuthentication (Component) {
               <MenuItem image='cutlery' name='Sabores' menuValue={MENU.RECIPES} />
               <MenuItem image='money' name='Vendas' menuValue={MENU.SALES} />
             </div>
-            <div style={{height: '100%'}}>
+            <div className='component-container'>
               <Component {...this.props} />
             </div>
           </div>

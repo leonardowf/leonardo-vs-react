@@ -74,6 +74,7 @@
     "react-dom": "^0.14.0",
     "react-fontawesome": "^0.3.3",
     "react-icons": "^1.0.3",
+    "react-keypress": "^0.1.5",
     "react-redux": "^4.0.0",
     "react-router": "^2.0.0-rc5",
     "react-router-redux": "^3.0.0",
