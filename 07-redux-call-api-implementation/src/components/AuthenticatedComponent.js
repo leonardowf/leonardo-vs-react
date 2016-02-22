@@ -5,6 +5,8 @@ import { routeActions } from 'react-router-redux'
 import MenuItem from '../views/MenuView/MenuItem'
 import TopHeaderView from '../views/MenuView/TopHeaderView'
 
+import { MENU } from '../redux/modules/leftMenu'
+
 export function requireAuthentication (Component) {
   class AuthenticatedComponent extends React.Component {
 
@@ -43,10 +45,12 @@ export function requireAuthentication (Component) {
           <TopHeaderView />
           <div className='below-menu'>
             <div className='left-menu'>
-              <MenuItem image='cogs' name='Tamanhos' isSelected={true}/>
-              <MenuItem image='cutlery' name='Sabores' isSelected={false}/>
+              <MenuItem image='home' name='Home' menuValue={MENU.HOME} />
+              <MenuItem image='cogs' name='Tamanhos' menuValue={MENU.SIZES} />
+              <MenuItem image='cutlery' name='Sabores' menuValue={MENU.RECIPES} />
+              <MenuItem image='money' name='Vendas' menuValue={MENU.SALES} />
             </div>
-            <div>
+            <div style={{height: '100%'}}>
               <Component {...this.props} />
             </div>
           </div>
@@ -69,7 +73,8 @@ export function requireAuthentication (Component) {
 
   const mapStateToProps = (state) => ({
     token: state.login.token,
-    email: state.login.email
+    email: state.login.email,
+    currentMenu: state.leftMenu.current
   })
 
   return connect(mapStateToProps)(AuthenticatedComponent)

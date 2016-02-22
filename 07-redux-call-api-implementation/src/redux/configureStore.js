@@ -7,11 +7,14 @@ import callApi from './middlewares/callApi'
 import credentialPersisterMiddleware from './middlewares/credentialPersisterMiddleware'
 import rootReducer from './rootReducer'
 
+import { LOGIN_INITIAL_STATE } from  './modules/login'
+
 export default function configureStore ({ initialState = {}, history }) {
   // Sync with router via history instance (main.js)
   const routerMiddleware = syncHistory(history)
 
-  const persistedLogin = ls('login')
+  let persistedLogin = ls('login')
+  persistedLogin = {...LOGIN_INITIAL_STATE, ...persistedLogin}
   if (persistedLogin !== null) {
     initialState = {
       login: {...persistedLogin}
