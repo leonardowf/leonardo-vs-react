@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import FontAwesome from 'react-fontawesome'
 import Keypress from 'react-keypress'
+import EditableInput from './EditableInput'
 
 export default class EditableRow extends Component {
   constructor(props) {
@@ -8,15 +9,20 @@ export default class EditableRow extends Component {
 
     this.state = {
       isEditing: false,
-      inputValue: 'this.props'
+      name: 'name',
+      description: 'description'
     }
 
+    this.displayName = this.displayName.bind(this)
+    this.displayDescription = this.displayDescription.bind(this)
+    this.onInputChangeName = this.onInputChangeName.bind(this)
+    this.onInputChangeDescription = this.onInputChangeDescription.bind(this)
+    this.onSubmitFormDescription = this.onSubmitFormDescription.bind(this)
+    this.onSubmitFormName = this.onSubmitFormName.bind(this)
     this.toggleEditing = this.toggleEditing.bind(this)
-    this.displayValue = this.displayValue.bind(this)
-    this.onSubmitForm = this.onSubmitForm.bind(this)
     this.onDeleteClick = this.onDeleteClick.bind(this)
-    this.onInputChange = this.onInputChange.bind(this)
-    this.onFormKeyPress = this.onFormKeyPress.bind(this)
+    this.onEscPress = this.onEscPress.bind(this)
+
   }
 
   toggleEditing() {
@@ -29,55 +35,78 @@ export default class EditableRow extends Component {
     console.log('excluir')
   }
 
-  onSubmitForm (event) {
-    event.preventDefault()
+  onInputChangeName (newName) {
+    this.setState({
+      name: newName
+    })
+  }
+
+  onInputChangeDescription (newDescription) {
+    this.setState({
+      description: newDescription
+    })
+  }
+
+  onSubmitFormName (name) {
     this.setState({
       isEditing: false
     })
   }
 
-  onInputChange (event) {
-    this.setState({inputValue: event.target.value})
+  onSubmitFormDescription (description) {
+    this.setState({
+      isEditing: false
+    })
   }
 
-  onFormKeyPress (event) {
-    const escKeyCode = 27
-    console.log()
-
-    if (event.keyCode === escKeyCode) {
-      this.setState({
-        isEditing: false
-      })
-    }
+  onEscPress () {
+    this.setState({
+      isEditing: false
+    })
   }
 
-  displayValue () {
-    const escKeypress = Keypress(['esc'], this.cancelInput)
+  displayDescription () {
 
     if (this.state.isEditing) {
       return (
         <td>
-          <form onSubmit={this.onSubmitForm}>
-            <input
-              value={this.state.inputValue}
-              onChange={this.onInputChange}
-              onKeyDown={this.onFormKeyPress}
-              className='editable-row'
-              autoFocus='true'
-              type='text'>
-            </input>
-          </form>
+          <EditableInput
+            value={this.state.description}
+            onSubmitForm={this.onSubmitFormDescription}
+            onInputChange={this.onInputChangeDescription}
+            autoFocus={false}
+            onEscPress={this.onEscPress}
+          />
         </td>
       )
     }
 
-    return <td>{this.state.inputValue}</td>
+    return <td>{this.state.description}</td>
+  }
+
+  displayName () {
+    if (this.state.isEditing) {
+      return (
+        <td>
+          <EditableInput
+            value={this.state.name}
+            onSubmitForm={this.onSubmitFormName}
+            onInputChange={this.onInputChangeName}
+            autoFocus={true}
+            onEscPress={this.onEscPress}
+          />
+        </td>
+      )
+    }
+
+    return <td>{this.state.name}</td>
   }
 
   render() {
     return (
       <tr>
-        {this.displayValue()}
+        {this.displayName()}
+        {this.displayDescription()}
         <td>
           <FontAwesome name='pencil' style={{marginRight: '10px', cursor: 'pointer'}} onClick={this.toggleEditing} />
           <FontAwesome name='trash' style={{marginRight: '10px', cursor: 'pointer'}} onClick={this.onDeleteClick} />

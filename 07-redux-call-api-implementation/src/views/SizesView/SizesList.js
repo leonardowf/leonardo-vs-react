@@ -1,8 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import FontAwesome from 'react-fontawesome'
 import EditableRow from './EditableRow'
+import AddValueForm from './AddValueForm'
 
 export default class SizesList extends Component {
+
+  onSubmitFormSize(sizeName) {
+    console.log(sizeName)
+  }
+
   render () {
     return (
       <div className='sizes-container'>
@@ -13,22 +19,11 @@ export default class SizesList extends Component {
             <tbody>
               <EditableRow />
               <EditableRow />
-              <tr>
-                <td>Eve</td>
-                <td>Jackson</td>
-              </tr>
             </tbody>
           </table>
         </div>
 
-        <div className='add-form-container'>
-          <form className="search-bar" role="search">
-            <input type="search" placeholder="Digite o nome da categoria..." />
-            <button type="submit">
-              <FontAwesome name='plus' size='lg' style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }} />
-            </button>
-          </form>
-        </div>
+        <AddValueForm onSubmitForm={this.onSubmitFormSize}/>
       </div>
     )
   }
