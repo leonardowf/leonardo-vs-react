@@ -53,12 +53,14 @@
       overflow:auto;
     }
 
+    $left-menu-width: 150px;
+
     .left-menu {
-      position: relative;
+      position: fixed;
       background-color: $medium-blue;
       display: inline;
       float: left;
-      width: 150px;
+      width: $left-menu-width;
       height: 100%;
       padding-top: 20px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -126,5 +128,7 @@
       display: inline-block;
       float: left;
       padding: 20px;
+      position: relative;
+      left: $left-menu-width;
     }
   }

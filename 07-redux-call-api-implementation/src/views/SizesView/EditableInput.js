@@ -31,7 +31,7 @@ export default class EditableInput extends Component {
 
   onInputChange (event) {
     this.setState({value: event.target.value})
-    this.props.onInputChange(this.state.value)
+    this.props.onInputChange(event.target.value)
   }
 
   onFormKeyPress (event) {
