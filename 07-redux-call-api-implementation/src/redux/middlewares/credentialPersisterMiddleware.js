@@ -12,7 +12,7 @@ export default (store) => (next) => (action) => {
     hash = action.payload
   }
 
-  const {authenticationToken, email, id} = hash
+  const {authenticationToken, email, id, firstStore} = hash
 
   if (action.type === SIGNUP_SUCCESS || action.type === LOGIN_SUCCESS) {
     const toPersist = {
@@ -22,10 +22,12 @@ export default (store) => (next) => (action) => {
     }
 
     ls('login', toPersist)
+    ls('store', firstStore)
   }
 
   if (action.type === LOGOUT) {
     ls('login', null)
+    ls('store', null)
   }
 
   return next(action)

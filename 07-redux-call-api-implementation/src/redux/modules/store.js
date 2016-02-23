@@ -1,8 +1,8 @@
 import { LOGIN_SUCCESS, SIGNUP_SUCCESS } from './login'
 
-const INITIAL_STATE = {current: null, all: []}
+export const STORE_INITIAL_STATE = {current: null, all: []}
 
-const reducer = (state = INITIAL_STATE, action) => {
+const reducer = (state = STORE_INITIAL_STATE, action) => {
   let credentials = null;
 
   if (action.type === LOGIN_SUCCESS) {

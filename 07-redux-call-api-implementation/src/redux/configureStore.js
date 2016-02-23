@@ -8,6 +8,7 @@ import credentialPersisterMiddleware from './middlewares/credentialPersisterMidd
 import rootReducer from './rootReducer'
 
 import { LOGIN_INITIAL_STATE } from './modules/login'
+import { STORE_INITIAL_STATE } from './modules/store'
 
 export default function configureStore ({ initialState = {}, history }) {
   // Sync with router via history instance (main.js)
@@ -17,8 +18,22 @@ export default function configureStore ({ initialState = {}, history }) {
   persistedLogin = {...LOGIN_INITIAL_STATE, ...persistedLogin}
   if (persistedLogin !== null) {
     initialState = {
+      ...initialState,
       login: {...persistedLogin}
     }
+  }
+
+  let persistedStore = ls('store')
+  console.log('persisted store')
+  console.log(persistedStore)
+  persistedStore = {...STORE_INITIAL_STATE, current: persistedStore}
+  if (persistedStore !== null) {
+    initialState = {
+      ...initialState,
+      store: {...persistedStore}
+    }
+
+    console.log(initialState)
   }
 
   // Compose final middleware and use devtools in debug environment
