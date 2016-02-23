@@ -1,7 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react'
 import FontAwesome from 'react-fontawesome'
 
 export default class AddValueForm extends Component {
+  static propTypes = {
+    onSubmitForm: PropTypes.func.isRequired
+  };
+
   constructor (props) {
     super(props)
 
@@ -24,7 +28,7 @@ export default class AddValueForm extends Component {
     })
   }
 
-  render() {
+  render () {
     return (
       <div className='add-form-container'>
         <form className='add-form' onSubmit={this.onSubmitForm}>

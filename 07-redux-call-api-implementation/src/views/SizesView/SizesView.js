@@ -1,9 +1,9 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react'
 
 import SizesList from './SizesList'
 
 export default class SizesView extends Component {
-  render() {
+  render () {
     return (
       <div>
         <SizesList />

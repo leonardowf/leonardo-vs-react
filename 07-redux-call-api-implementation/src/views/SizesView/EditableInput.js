@@ -1,9 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react'
 
 export default class EditableInput extends Component {
+  static propTypes = {
+    value: PropTypes.string.isRequired,
+    onSubmitForm: PropTypes.func.isRequired,
+    onInputChange: PropTypes.func.isRequired,
+    onEscPress: PropTypes.func.isRequired,
+    autoFocus: PropTypes.bool
+  };
 
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
     this.state = {
       value: this.props.value
@@ -41,7 +48,7 @@ export default class EditableInput extends Component {
     }
   }
 
-  render() {
+  render () {
     return (
       <form onSubmit={this.onSubmitForm}>
         <input

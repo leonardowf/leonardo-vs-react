@@ -1,11 +1,10 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react'
 import FontAwesome from 'react-fontawesome'
-import Keypress from 'react-keypress'
 import EditableInput from './EditableInput'
 
 export default class EditableRow extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
     this.state = {
       isEditing: false,
@@ -22,10 +21,9 @@ export default class EditableRow extends Component {
     this.toggleEditing = this.toggleEditing.bind(this)
     this.onDeleteClick = this.onDeleteClick.bind(this)
     this.onEscPress = this.onEscPress.bind(this)
-
   }
 
-  toggleEditing() {
+  toggleEditing () {
     this.setState({
       isEditing: !this.state.isEditing
     })
@@ -66,7 +64,6 @@ export default class EditableRow extends Component {
   }
 
   displayDescription () {
-
     if (this.state.isEditing) {
       return (
         <td>
@@ -74,7 +71,6 @@ export default class EditableRow extends Component {
             value={this.state.description}
             onSubmitForm={this.onSubmitFormDescription}
             onInputChange={this.onInputChangeDescription}
-            autoFocus={false}
             onEscPress={this.onEscPress}
           />
         </td>
@@ -92,7 +88,7 @@ export default class EditableRow extends Component {
             value={this.state.name}
             onSubmitForm={this.onSubmitFormName}
             onInputChange={this.onInputChangeName}
-            autoFocus={true}
+            autoFocus
             onEscPress={this.onEscPress}
           />
         </td>
@@ -102,7 +98,7 @@ export default class EditableRow extends Component {
     return <td>{this.state.name}</td>
   }
 
-  render() {
+  render () {
     return (
       <tr>
         {this.displayName()}

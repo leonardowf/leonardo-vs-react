@@ -1,11 +1,10 @@
-import React, { Component, PropTypes } from 'react'
-import FontAwesome from 'react-fontawesome'
+import React, { Component } from 'react'
 import EditableRow from './EditableRow'
 import AddValueForm from './AddValueForm'
 
 export default class SizesList extends Component {
 
-  onSubmitFormSize(sizeName) {
+  onSubmitFormSize (sizeName) {
     console.log(sizeName)
   }
 
