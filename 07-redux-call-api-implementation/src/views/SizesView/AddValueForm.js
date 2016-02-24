@@ -36,7 +36,7 @@ export default class AddValueForm extends Component {
           <input
             value={this.state.inputValue}
             type='search'
-            placeholder='Digite o nome da categoria...'
+            placeholder={this.props.placeholder}
             onChange={this.onInputChange}
           />
           <button type='submit'>

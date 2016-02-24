@@ -23,6 +23,7 @@ class EditableRow extends Component {
     this.toggleEditing = this.toggleEditing.bind(this)
     this.onDeleteClick = this.onDeleteClick.bind(this)
     this.onEscPress = this.onEscPress.bind(this)
+    this.allowRemoval = this.allowRemoval.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -39,7 +40,7 @@ class EditableRow extends Component {
   }
 
   onDeleteClick () {
-    console.log('excluir')
+    this.props.deleteRecipeSize(this.props.payload)
   }
 
   onInputChangeName (newName) {
@@ -113,6 +114,13 @@ class EditableRow extends Component {
     return <td>{this.state.name}</td>
   }
 
+  allowRemoval () {
+    if (this.props.allowRemoval) {
+      return <FontAwesome name='trash' style={{marginRight: '10px', cursor: 'pointer'}} onClick={this.onDeleteClick} />
+    }
+    return null
+  }
+
   render () {
     return (
       <tr>
@@ -120,7 +128,7 @@ class EditableRow extends Component {
         {this.displayDescription()}
         <td>
           <FontAwesome name='pencil' style={{marginRight: '10px', cursor: 'pointer'}} onClick={this.toggleEditing} />
-          <FontAwesome name='trash' style={{marginRight: '10px', cursor: 'pointer'}} onClick={this.onDeleteClick} />
+          {this.allowRemoval()}
         </td>
       </tr>
     )

@@ -21,13 +21,15 @@ class SizesList extends Component {
   }
 
   recipeSizesToRows () {
+    const allowRemoval = this.props.recipeSizes && this.props.recipeSizes.length > 1
     let components = this.props.recipeSizes.map(
       (recipeSize) => (
         <EditableRow
           key={recipeSize.id}
           name={recipeSize.name}
           description={recipeSize.slices}
-          payload={recipeSize} />
+          payload={recipeSize}
+          allowRemoval={allowRemoval} />
       )
     )
     return components
@@ -46,7 +48,7 @@ class SizesList extends Component {
           </table>
         </div>
 
-        <AddValueForm onSubmitForm={this.onSubmitFormSize}/>
+        <AddValueForm onSubmitForm={this.onSubmitFormSize} placeholder='Digite o nome do tamanho...'/>
       </div>
     )
   }
