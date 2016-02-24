@@ -20,6 +20,7 @@ export default class AddValueForm extends Component {
   onSubmitForm (event) {
     event.preventDefault()
     this.props.onSubmitForm(this.state.inputValue)
+    this.setState({inputValue: ''})
   }
 
   onInputChange (event) {

@@ -1,11 +1,32 @@
 import React, { Component } from 'react'
 import EditableRow from './EditableRow'
 import AddValueForm from './AddValueForm'
+import { connect } from 'react-redux'
+import { actions as recipeSizesActions } from '../../redux/modules/recipeSize'
 
-export default class SizesList extends Component {
+class SizesList extends Component {
+  constructor (props) {
+    super(props)
+
+    this.recipeSizesToRows = this.recipeSizesToRows.bind(this)
+    this.onSubmitFormSize = this.onSubmitFormSize.bind(this)
+  }
+
+  componentWillMount () {
+    this.props.fetchRecipeSizes()
+  }
 
   onSubmitFormSize (sizeName) {
-    console.log(sizeName)
+    this.props.createRecipeSize(sizeName)
+  }
+
+  recipeSizesToRows () {
+    let components = this.props.recipeSizes.map(
+      (recipeSize) => (
+        <EditableRow key={recipeSize.id} name={recipeSize.name} description={recipeSize.slices} />
+      )
+    )
+    return components
   }
 
   render () {
@@ -16,8 +37,7 @@ export default class SizesList extends Component {
         <div className='table-container'>
           <table>
             <tbody>
-              <EditableRow />
-              <EditableRow />
+              {this.recipeSizesToRows()}
             </tbody>
           </table>
         </div>
@@ -27,3 +47,12 @@ export default class SizesList extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    recipeSizes: state.recipeSize.all,
+    loading: state.recipeSize.loading
+  }
+}
+
+export default connect(mapStateToProps, recipeSizesActions)(SizesList)

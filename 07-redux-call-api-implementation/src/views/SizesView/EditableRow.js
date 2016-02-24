@@ -8,8 +8,8 @@ export default class EditableRow extends Component {
 
     this.state = {
       isEditing: false,
-      name: 'name',
-      description: 'description'
+      name: this.props.name,
+      description: this.props.description
     }
 
     this.displayName = this.displayName.bind(this)

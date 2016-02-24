@@ -24,16 +24,12 @@ export default function configureStore ({ initialState = {}, history }) {
   }
 
   let persistedStore = ls('store')
-  console.log('persisted store')
-  console.log(persistedStore)
   persistedStore = {...STORE_INITIAL_STATE, current: persistedStore}
   if (persistedStore !== null) {
     initialState = {
       ...initialState,
       store: {...persistedStore}
     }
-
-    console.log(initialState)
   }
 
   // Compose final middleware and use devtools in debug environment

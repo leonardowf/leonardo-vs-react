@@ -20,7 +20,16 @@ const getUserEmail = (store) => {
   return appState.login.email
 }
 
-const callApi = (store, url, method, data, authenticate = true) => {
+const getCurrentStoreId = (store) => {
+  const appState = store.getState()
+  if (appState.store && appState.store.current) {
+    return appState.store.current.id
+  }
+
+  return null
+}
+
+const callApi = (store, url, method, data, authenticate = true, storeResource = false) => {
   let headers = {
     'Accepts': 'application/json',
     'Content-Type': 'application/json'
@@ -28,12 +37,17 @@ const callApi = (store, url, method, data, authenticate = true) => {
 
   const authToken = getAuthToken(store)
   const userEmail = getUserEmail(store)
+  const storeId = getCurrentStoreId(store)
 
   if (authenticate && authToken && userEmail) {
     headers = {
       ...headers,
       'Authorization': `Token token="${authToken}", email="${userEmail}"`
     }
+  }
+
+  if (storeId && storeResource) {
+    url = `stores/${storeId}/${url}`
   }
 
   return axios({
@@ -58,7 +72,7 @@ export default (store) => (next) => (action) => {
   }
 
   let { endpoint } = callAPI
-  const { types, method, payload, authenticate } = callAPI
+  const { types, method, payload, authenticate, storeResource } = callAPI
 
   if (typeof endpoint === 'function') {
     endpoint = endpoint(store.getState())
@@ -81,7 +95,7 @@ export default (store) => (next) => (action) => {
   const [ requestType, successType, failureType ] = types
   next(actionWith({ type: requestType }))
 
-  return callApi(store, endpoint, method, payload, authenticate).then(
+  return callApi(store, endpoint, method, payload, authenticate, storeResource).then(
     (data) => next(actionWith({
       payload: data,
       type: successType
