@@ -23,7 +23,11 @@ class SizesList extends Component {
   recipeSizesToRows () {
     let components = this.props.recipeSizes.map(
       (recipeSize) => (
-        <EditableRow key={recipeSize.id} name={recipeSize.name} description={recipeSize.slices} />
+        <EditableRow
+          key={recipeSize.id}
+          name={recipeSize.name}
+          description={recipeSize.slices}
+          payload={recipeSize} />
       )
     )
     return components

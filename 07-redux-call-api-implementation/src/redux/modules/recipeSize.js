@@ -1,4 +1,4 @@
-import callApi, { CALL_API, GET, POST } from '../middlewares/callApi'
+import callApi, { CALL_API, GET, POST, PUT } from '../middlewares/callApi'
 
 export const FETCH_RECIPE_SIZES_REQUEST = 'FETCH_RECIPE_SIZES_REQUEST'
 export const FETCH_RECIPE_SIZES_SUCCESS = 'FETCH_RECIPE_SIZES_SUCCESS'
@@ -7,6 +7,10 @@ export const FETCH_RECIPE_SIZES_ERROR = 'FETCH_RECIPE_SIZES_ERROR'
 export const CREATE_RECIPE_SIZES_REQUEST = 'CREATE_RECIPE_SIZES_REQUEST'
 export const CREATE_RECIPE_SIZES_SUCCESS = 'CREATE_RECIPE_SIZES_SUCCESS'
 export const CREATE_RECIPE_SIZES_ERROR = 'CREATE_RECIPE_SIZES_ERROR'
+
+export const UPDATE_RECIPE_SIZES_REQUEST = 'UPDATE_RECIPE_SIZES_REQUEST'
+export const UPDATE_RECIPE_SIZES_SUCCESS = 'UPDATE_RECIPE_SIZES_SUCCESS'
+export const UPDATE_RECIPE_SIZES_ERROR = 'UPDATE_RECIPE_SIZES_ERROR'
 
 // ACTIONS
 const fetchRecipeSizes = () => {
@@ -34,6 +38,25 @@ const createRecipeSize = (name) => {
       types: [CREATE_RECIPE_SIZES_REQUEST, CREATE_RECIPE_SIZES_SUCCESS, CREATE_RECIPE_SIZES_ERROR],
       endpoint: 'recipe_sizes/',
       method: POST,
+      payload,
+      authenticate: true,
+      storeResource: true
+    }
+  }
+}
+
+const updateRecipeSize = (recipeSize, name, slices) => {
+  const payload = {
+    recipeSize: {
+      ...recipeSize, name, slices
+    }
+  }
+
+  return {
+    [CALL_API]: {
+      types: [UPDATE_RECIPE_SIZES_REQUEST, UPDATE_RECIPE_SIZES_SUCCESS, UPDATE_RECIPE_SIZES_ERROR],
+      endpoint: `recipe_sizes/${recipeSize.id}`,
+      method: PUT,
       payload,
       authenticate: true,
       storeResource: true
@@ -92,7 +115,8 @@ const reducer = (state = RECIPE_SIZES_INITIAL_STATE, action) => {
 
 export const actions = {
   fetchRecipeSizes,
-  createRecipeSize
+  createRecipeSize,
+  updateRecipeSize
 }
 
 export default reducer

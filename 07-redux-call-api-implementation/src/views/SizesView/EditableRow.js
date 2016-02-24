@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import FontAwesome from 'react-fontawesome'
 import EditableInput from './EditableInput'
+import { connect } from 'react-redux'
+import { actions as recipeSizesActions } from '../../redux/modules/recipeSize'
 
-export default class EditableRow extends Component {
+class EditableRow extends Component {
   constructor (props) {
     super(props)
 
@@ -21,6 +23,13 @@ export default class EditableRow extends Component {
     this.toggleEditing = this.toggleEditing.bind(this)
     this.onDeleteClick = this.onDeleteClick.bind(this)
     this.onEscPress = this.onEscPress.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      name: nextProps.name,
+      description: nextProps.description
+    })
   }
 
   toggleEditing () {
@@ -49,12 +58,16 @@ export default class EditableRow extends Component {
     this.setState({
       isEditing: false
     })
+
+    this.props.updateRecipeSize(this.props.payload, this.state.name, this.state.description)
   }
 
   onSubmitFormDescription (description) {
     this.setState({
       isEditing: false
     })
+
+    this.props.updateRecipeSize(this.props.payload, this.state.name, this.state.description)
   }
 
   onEscPress () {
@@ -68,16 +81,17 @@ export default class EditableRow extends Component {
       return (
         <td>
           <EditableInput
-            value={this.state.description}
+            value={this.state.description ? `${this.state.description}` : ''}
             onSubmitForm={this.onSubmitFormDescription}
             onInputChange={this.onInputChangeDescription}
             onEscPress={this.onEscPress}
+            type='number'
           />
         </td>
       )
     }
 
-    return <td>{this.state.description}</td>
+    return <td>{this.state.description ? `${this.state.description}` : ''}</td>
   }
 
   displayName () {
@@ -90,6 +104,7 @@ export default class EditableRow extends Component {
             onInputChange={this.onInputChangeName}
             autoFocus
             onEscPress={this.onEscPress}
+            type='text'
           />
         </td>
       )
@@ -111,3 +126,9 @@ export default class EditableRow extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {banana: 'banna'}
+}
+
+export default connect(mapStateToProps, recipeSizesActions)(EditableRow)
