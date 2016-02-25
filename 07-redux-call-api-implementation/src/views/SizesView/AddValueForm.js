@@ -16,6 +16,7 @@ export default class AddValueForm extends Component {
 
     this.onInputChange = this.onInputChange.bind(this)
     this.onSubmitForm = this.onSubmitForm.bind(this)
+    this.valid = this.valid.bind(this)
   }
 
   onSubmitForm (event) {
@@ -30,6 +31,10 @@ export default class AddValueForm extends Component {
     })
   }
 
+  valid () {
+    return this.state.inputValue.length > 0
+  }
+
   render () {
     return (
       <div className='add-form-container'>
@@ -39,8 +44,8 @@ export default class AddValueForm extends Component {
             type='search'
             placeholder={this.props.placeholder}
             onChange={this.onInputChange}
-          />
-          <button type='submit'>
+            />
+          <button type='submit' className={this.valid() ? '' : 'is-disabled'}>
             <FontAwesome name='plus' size='lg' style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }} />
           </button>
         </form>

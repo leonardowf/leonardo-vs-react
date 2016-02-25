@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import EditableRow from './EditableRow'
-// import AddTwoValuesForm from './AddTwoValuesForm'
+import AddTwoValuesForm from './AddTwoValuesForm'
 import { connect } from 'react-redux'
 import { actions as recipeSizesActions } from '../../redux/modules/recipeSize'
 
@@ -22,8 +22,8 @@ class SizesList extends Component {
     this.props.fetchRecipeSizes()
   }
 
-  onSubmitFormSize (sizeName) {
-    this.props.createRecipeSize(sizeName)
+  onSubmitFormSize (sizeName, sizeSlices) {
+    this.props.createRecipeSize(sizeName, sizeSlices)
   }
 
   recipeSizesToRows () {
@@ -54,7 +54,10 @@ class SizesList extends Component {
           </table>
         </div>
 
-        {/*<AddTwoValuesForm onSubmitForm={this.onSubmitFormSize} placeholders={['Nome do tamanho...', 'Número de fatias...']} />*/}
+        <AddTwoValuesForm
+          onSubmitForm={this.onSubmitFormSize}
+          placeholders={['Nome do tamanho...', 'Número de fatias...']}
+        />
       </div>
     )
   }

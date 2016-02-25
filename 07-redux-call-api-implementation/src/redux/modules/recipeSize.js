@@ -29,10 +29,11 @@ const fetchRecipeSizes = () => {
   }
 }
 
-const createRecipeSize = (name) => {
+const createRecipeSize = (name, slices) => {
   const payload = {
     recipeSize: {
-      name
+      name,
+      slices
     }
   }
 

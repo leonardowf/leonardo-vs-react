@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import isNumber from '../../helpers/isNumber'
 
 export default class EditableInput extends Component {
   static propTypes = {
@@ -34,17 +35,13 @@ export default class EditableInput extends Component {
     const inputValue = event.target.value
 
     if (this.props.type && this.props.type === 'number') {
-      if (!this.isNumber(inputValue) && inputValue !== '') {
+      if (!isNumber(inputValue) && inputValue !== '') {
         return
       }
     }
 
     this.setState({value: inputValue})
     this.props.onInputChange(inputValue)
-  }
-
-  isNumber (n) {
-    return !isNaN(parseFloat(n)) && isFinite(n)
   }
 
   onFormKeyPress (event) {

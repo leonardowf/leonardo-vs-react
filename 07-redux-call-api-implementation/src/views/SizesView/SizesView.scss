@@ -31,8 +31,16 @@
 
 .add-form-container {
   @include outer-container;
-  input { @include span-columns(9);
+  input { @include span-columns(10);
     height: 40px;
   }
-  button { @include span-columns(3); }
+  button { @include span-columns(2); }
+}
+
+.add-two-form-container {
+  @include outer-container;
+  input { @include span-columns(5);
+    height: 40px;
+  }
+  button { @include span-columns(2); }
 }
