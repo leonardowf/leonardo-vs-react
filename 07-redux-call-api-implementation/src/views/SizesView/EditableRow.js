@@ -1,10 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import FontAwesome from 'react-fontawesome'
 import EditableInput from './EditableInput'
 import { connect } from 'react-redux'
 import { actions as recipeSizesActions } from '../../redux/modules/recipeSize'
 
 class EditableRow extends Component {
+  static propTypes = {
+    allowRemoval: PropTypes.bool,
+    payload: PropTypes.object.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.number,
+    updateRecipeSize: PropTypes.func.isRequired,
+    deleteRecipeSize: PropTypes.func.isRequired
+  };
+
   constructor (props) {
     super(props)
 
@@ -26,7 +35,7 @@ class EditableRow extends Component {
     this.allowRemoval = this.allowRemoval.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     this.setState({
       name: nextProps.name,
       description: nextProps.description

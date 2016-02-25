@@ -1,4 +1,4 @@
-import callApi, { CALL_API, GET, POST, PUT, DELETE } from '../middlewares/callApi'
+import { CALL_API, GET, POST, PUT, DELETE } from '../middlewares/callApi'
 
 export const FETCH_RECIPE_CATEGORIES_REQUEST = 'FETCH_RECIPE_CATEGORIES_REQUEST'
 export const FETCH_RECIPE_CATEGORIES_SUCCESS = 'FETCH_RECIPE_CATEGORIES_SUCCESS'
@@ -22,7 +22,6 @@ const fetchRecipeCategories = () => {
       types: [FETCH_RECIPE_CATEGORIES_REQUEST, FETCH_RECIPE_CATEGORIES_SUCCESS, FETCH_RECIPE_CATEGORIES_ERROR],
       endpoint: 'recipe_categories/',
       method: GET,
-      null,
       authenticate: true,
       storeResource: true
     }
@@ -35,7 +34,6 @@ const deleteRecipeCategory = (recipeCategory) => {
       types: [DELETE_RECIPE_CATEGORY_REQUEST, DELETE_RECIPE_CATEGORY_SUCCESS, DELETE_RECIPE_CATEGORY_ERROR],
       endpoint: `recipe_categories/${recipeCategory.id}`,
       method: DELETE,
-      null,
       authenticate: true,
       storeResource: true
     }

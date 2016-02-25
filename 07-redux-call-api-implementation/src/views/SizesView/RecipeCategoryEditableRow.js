@@ -1,16 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import FontAwesome from 'react-fontawesome'
 import EditableInput from './EditableInput'
 import { connect } from 'react-redux'
 import { actions as recipeSizesCategories } from '../../redux/modules/recipeCategory'
 
 class RecipeCategoryEditableRow extends Component {
+  static propTypes = {
+    allowRemoval: PropTypes.bool,
+    payload: PropTypes.object.isRequired,
+    updateRecipeCategory: PropTypes.func.isRequired,
+    deleteRecipeCategory: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired
+  };
+
   constructor (props) {
     super(props)
 
     this.state = {
       isEditing: false,
-      name: this.props.name,
+      name: this.props.name
     }
 
     this.displayName = this.displayName.bind(this)
@@ -22,7 +30,7 @@ class RecipeCategoryEditableRow extends Component {
     this.allowRemoval = this.allowRemoval.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     this.setState({
       name: nextProps.name
     })

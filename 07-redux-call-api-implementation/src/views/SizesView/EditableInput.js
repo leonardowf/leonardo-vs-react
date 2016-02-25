@@ -6,7 +6,8 @@ export default class EditableInput extends Component {
     onSubmitForm: PropTypes.func.isRequired,
     onInputChange: PropTypes.func.isRequired,
     onEscPress: PropTypes.func.isRequired,
-    autoFocus: PropTypes.bool
+    autoFocus: PropTypes.bool,
+    type: PropTypes.string
   };
 
   constructor (props) {
@@ -42,7 +43,7 @@ export default class EditableInput extends Component {
     this.props.onInputChange(inputValue)
   }
 
-  isNumber(n) {
+  isNumber (n) {
     return !isNaN(parseFloat(n)) && isFinite(n)
   }
 

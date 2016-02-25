@@ -2,12 +2,17 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 
 import AddValueForm from './AddValueForm'
-import { actions as recipeCategoriesActions } from '../../redux/modules/recipeCategory'
 import RecipeCategoryEditableRow from './RecipeCategoryEditableRow'
-import { actions as recipeSizesCategories } from '../../redux/modules/recipeCategory'
+import { actions as recipeCategoriesActions } from '../../redux/modules/recipeCategory'
 
 class CategoriesList extends Component {
-  constructor(props) {
+  static propTypes = {
+    createRecipeCategory: PropTypes.func.isRequired,
+    fetchRecipeCategories: PropTypes.func.isRequired,
+    recipeCategories: PropTypes.array.isRequired
+  };
+
+  constructor (props) {
     super(props)
 
     this.recipeCategoriesToRows = this.recipeCategoriesToRows.bind(this)
@@ -36,7 +41,7 @@ class CategoriesList extends Component {
     this.props.createRecipeCategory(categoryName)
   }
 
-  render() {
+  render () {
     return (
       <div className='sizes-container'>
         <h1>Categorias</h1>
@@ -48,9 +53,7 @@ class CategoriesList extends Component {
             </tbody>
           </table>
         </div>
-
         <AddValueForm onSubmitForm={this.onSubmitFormCategory} placeholder='Digite o nome da categoria...'/>
-
       </div>
     )
   }

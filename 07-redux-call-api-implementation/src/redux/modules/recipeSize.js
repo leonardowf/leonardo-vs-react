@@ -1,4 +1,4 @@
-import callApi, { CALL_API, GET, POST, PUT, DELETE } from '../middlewares/callApi'
+import { CALL_API, GET, POST, PUT, DELETE } from '../middlewares/callApi'
 
 export const FETCH_RECIPE_SIZES_REQUEST = 'FETCH_RECIPE_SIZES_REQUEST'
 export const FETCH_RECIPE_SIZES_SUCCESS = 'FETCH_RECIPE_SIZES_SUCCESS'
@@ -23,7 +23,6 @@ const fetchRecipeSizes = () => {
       types: [FETCH_RECIPE_SIZES_REQUEST, FETCH_RECIPE_SIZES_SUCCESS, FETCH_RECIPE_SIZES_ERROR],
       endpoint: 'recipe_sizes/',
       method: GET,
-      null,
       authenticate: true,
       storeResource: true
     }
@@ -74,7 +73,6 @@ const deleteRecipeSize = (recipeSize) => {
       types: [DELETE_RECIPE_SIZES_REQUEST, DELETE_RECIPE_SIZES_SUCCESS, DELETE_RECIPE_SIZES_ERROR],
       endpoint: `recipe_sizes/${recipeSize.id}`,
       method: DELETE,
-      null,
       authenticate: true,
       storeResource: true
     }

@@ -3,7 +3,7 @@ import { LOGIN_SUCCESS, SIGNUP_SUCCESS } from './login'
 export const STORE_INITIAL_STATE = {current: null, all: []}
 
 const reducer = (state = STORE_INITIAL_STATE, action) => {
-  let credentials = null;
+  let credentials = null
 
   if (action.type === LOGIN_SUCCESS) {
     credentials = action.payload
