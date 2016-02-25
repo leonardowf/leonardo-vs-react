@@ -5,6 +5,7 @@ import login from './modules/login'
 import store from './modules/store'
 import leftMenu from './modules/leftMenu'
 import recipeSize from './modules/recipeSize'
+import recipeCategory from './modules/recipeCategory'
 import { reducer as formReducer } from 'redux-form'
 
 export default combineReducers({
@@ -14,5 +15,6 @@ export default combineReducers({
   form: formReducer,
   leftMenu,
   store,
-  recipeSize
+  recipeSize,
+  recipeCategory
 })
