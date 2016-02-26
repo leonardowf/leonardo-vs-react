@@ -14,8 +14,6 @@ const reducer = (state = STORE_INITIAL_STATE, action) => {
   }
 
   if (credentials) {
-    console.log(credentials)
-
     return {
       ...state,
       current: credentials.firstStore

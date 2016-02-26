@@ -6,7 +6,7 @@ import store from './modules/store'
 import leftMenu from './modules/leftMenu'
 import recipeSize from './modules/recipeSize'
 import recipeCategory from './modules/recipeCategory'
-import categorySize from './modules/categorySize'
+import recipePrice from './modules/recipePrice'
 
 import { reducer as formReducer } from 'redux-form'
 
@@ -19,5 +19,5 @@ export default combineReducers({
   store,
   recipeSize,
   recipeCategory,
-  categorySize
+  recipePrice
 })
