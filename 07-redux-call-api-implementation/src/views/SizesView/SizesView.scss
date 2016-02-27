@@ -44,3 +44,10 @@
   }
   button { @include span-columns(2); }
 }
+
+.price-form {
+  input {
+    height: 24px;
+    margin-bottom: 0px;
+  }
+}

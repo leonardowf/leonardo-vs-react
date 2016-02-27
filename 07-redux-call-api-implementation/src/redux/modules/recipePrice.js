@@ -6,6 +6,10 @@ export const FETCH_RECIPE_PRICES_REQUEST = 'FETCH_RECIPE_PRICES_REQUEST'
 export const FETCH_RECIPE_PRICES_SUCCESS = 'FETCH_RECIPE_PRICES_SUCCESS'
 export const FETCH_RECIPE_PRICES_ERROR = 'FETCH_RECIPE_PRICES_ERROR'
 
+export const UPDATE_RECIPE_PRICE_REQUEST = 'UPDATE_RECIPE_PRICE_REQUEST'
+export const UPDATE_RECIPE_PRICE_SUCCESS = 'UPDATE_RECIPE_PRICE_SUCCESS'
+export const UPDATE_RECIPE_PRICE_ERROR = 'UPDATE_RECIPE_PRICE_ERROR'
+
 export const RESET_DIRTY = 'RESET_DIRTY'
 
 export const fetchRecipePrices = () => {
@@ -16,6 +20,21 @@ export const fetchRecipePrices = () => {
       method: GET,
       authenticate: true,
       storeResource: true
+    }
+  }
+}
+
+export const updateRecipePrice = (recipePrice) => {
+  return {
+    [CALL_API]: {
+      types: [UPDATE_RECIPE_PRICE_REQUEST, UPDATE_RECIPE_PRICE_SUCCESS, UPDATE_RECIPE_PRICE_ERROR],
+      endpoint: `recipe_prices/${recipePrice.id}`,
+      method: PUT,
+      authenticate: true,
+      storeResource: true,
+      payload: {
+        recipePrice: recipePrice
+      }
     }
   }
 }
@@ -59,5 +78,6 @@ export default reducer
 
 export const actions = {
   fetchRecipePrices,
-  resetDirty
+  resetDirty,
+  updateRecipePrice
 }

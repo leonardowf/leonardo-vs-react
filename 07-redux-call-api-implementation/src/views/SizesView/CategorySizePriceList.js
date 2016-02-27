@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { actions as recipePricesActions } from '../../redux/modules/recipePrice'
+import PriceRow from './PriceRow'
 
 class CategorySizePriceList extends Component {
   constructor(props) {
     super(props)
 
     this.recipePricesRows = this.recipePricesRows.bind(this)
+    this.onSubmitRecipePrice = this.onSubmitRecipePrice.bind(this)
   }
 
   componentWillMount () {
@@ -20,17 +22,21 @@ class CategorySizePriceList extends Component {
     }
   }
 
+  onSubmitRecipePrice (recipePrice) {
+    this.props.updateRecipePrice(recipePrice)
+  }
+
   recipePricesRows () {
-    return this.props.recipePrices.map((recipePrice) => (
-      <tr key={recipePrice.id}>
-        <td>
-          {recipePrice.recipeCategoryName}
-        </td>
-        <td>
-          {recipePrice.recipeSizeName}
-        </td>
-      </tr>)
+    return this.props.recipePrices.map
+    (
+      (recipePrice) => (
+        <PriceRow
+          key={recipePrice.id}
+          recipePrice={recipePrice}
+          onSubmitRecipePrice={this.onSubmitRecipePrice}
+        />
       )
+    )
   }
 
   recipePriceRow(recipePrice) {
