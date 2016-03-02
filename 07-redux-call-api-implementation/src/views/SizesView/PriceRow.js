@@ -38,7 +38,6 @@ class PriceRow extends Component {
   }
 
   priceDisplay(recipePrice) {
-    if (this.state.isEditing) {
       return (
         <form className='price-form' onSubmit={(event) => (this.onSubmitForm(event, recipePrice))}>
           <SimpleCurrencyInput
@@ -50,9 +49,6 @@ class PriceRow extends Component {
           />
         </form>
       )
-    } else {
-      return <span>{this.centsFormatter.format(recipePrice.price)}</span>
-    }
   }
 
   render() {
@@ -68,10 +64,6 @@ class PriceRow extends Component {
         </td>
         <td>
           {this.priceDisplay(recipePrice)}
-        </td>
-
-        <td>
-          <FontAwesome name='pencil' style={{marginRight: '10px', cursor: 'pointer'}} onClick={this.toggleEditing} />
         </td>
       </tr>
     )
