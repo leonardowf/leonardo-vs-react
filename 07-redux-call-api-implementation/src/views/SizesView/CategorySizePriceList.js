@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { actions as recipePricesActions } from '../../redux/modules/recipePrice'
 import PriceRow from './PriceRow'
+import ButtonGroup from './ButtonGroup'
 
 class CategorySizePriceList extends Component {
   static propTypes = {
@@ -81,6 +82,10 @@ class CategorySizePriceList extends Component {
         <div className='control-container'>
           <button onClick={this.onClickDiscardChanges} className='button-discard-changes'>Descartar alterações</button>
           <button className='button-save-changes'>Salvar alterações</button>
+        </div>
+
+        <div>
+          <ButtonGroup />
         </div>
       </div>
     )
