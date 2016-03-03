@@ -16,6 +16,9 @@
 
   @include outer-container;
   .table-container { @include span-columns(12); }
+
+  .button-discard-changes { margin-top: 10px; @include shift(6); @include span-columns(3); }
+  .button-save-changes { margin-top: 10px; @include span-columns(3); }
 }
 
 #{$all-text-inputs} {

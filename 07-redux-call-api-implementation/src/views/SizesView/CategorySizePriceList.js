@@ -1,14 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { actions as recipePricesActions } from '../../redux/modules/recipePrice'
 import PriceRow from './PriceRow'
 
 class CategorySizePriceList extends Component {
-  constructor(props) {
+  static propTypes = {
+    fetchRecipePrices: PropTypes.func.isRequired,
+    resetDirty: PropTypes.func.isRequired,
+    updateRecipePrice: PropTypes.func.isRequired,
+    setAsDirty: PropTypes.func.isRequired,
+    recipePrices: PropTypes.array.isRequired
+
+  };
+
+  constructor (props) {
     super(props)
 
     this.recipePricesRows = this.recipePricesRows.bind(this)
     this.onSubmitRecipePrice = this.onSubmitRecipePrice.bind(this)
+    this.onClickDiscardChanges = this.onClickDiscardChanges.bind(this)
   }
 
   componentWillMount () {
@@ -27,8 +37,7 @@ class CategorySizePriceList extends Component {
   }
 
   recipePricesRows () {
-    return this.props.recipePrices.map
-    (
+    return this.props.recipePrices.map(
       (recipePrice) => (
         <PriceRow
           key={recipePrice.id}
@@ -39,7 +48,7 @@ class CategorySizePriceList extends Component {
     )
   }
 
-  recipePriceRow(recipePrice) {
+  recipePriceRow (recipePrice) {
     return (
       <tr>
         <td>
@@ -50,6 +59,10 @@ class CategorySizePriceList extends Component {
         </td>
       </tr>
     )
+  }
+
+  onClickDiscardChanges () {
+    this.props.setAsDirty()
   }
 
   render () {
@@ -63,6 +76,11 @@ class CategorySizePriceList extends Component {
               {this.recipePricesRows()}
             </tbody>
           </table>
+        </div>
+
+        <div className='control-container'>
+          <button onClick={this.onClickDiscardChanges} className='button-discard-changes'>Descartar alterações</button>
+          <button className='button-save-changes'>Salvar alterações</button>
         </div>
       </div>
     )

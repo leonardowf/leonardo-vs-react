@@ -1,4 +1,4 @@
-import { CALL_API, GET, POST, PUT, DELETE } from '../middlewares/callApi'
+import { CALL_API, GET, PUT } from '../middlewares/callApi'
 import { CREATE_RECIPE_SIZES_SUCCESS, DELETE_RECIPE_SIZES_SUCCESS } from './recipeSize'
 import { CREATE_RECIPE_CATEGORY_SUCCESS, DELETE_RECIPE_CATEGORY_SUCCESS } from './recipeCategory'
 
@@ -11,6 +11,7 @@ export const UPDATE_RECIPE_PRICE_SUCCESS = 'UPDATE_RECIPE_PRICE_SUCCESS'
 export const UPDATE_RECIPE_PRICE_ERROR = 'UPDATE_RECIPE_PRICE_ERROR'
 
 export const RESET_DIRTY = 'RESET_DIRTY'
+export const SET_AS_DIRTY = 'SET_AS_DIRTY'
 
 export const fetchRecipePrices = () => {
   return {
@@ -39,6 +40,12 @@ export const updateRecipePrice = (recipePrice) => {
   }
 }
 
+const setAsDirty = () => {
+  return {
+    type: SET_AS_DIRTY
+  }
+}
+
 export const resetDirty = () => {
   return {
     type: RESET_DIRTY
@@ -64,7 +71,8 @@ const ACTION_HANDLERS = {
   [FETCH_RECIPE_PRICES_SUCCESS]: fetchRecipePricesSuccess,
   [RESET_DIRTY]: resetDirtyHandler,
   [DELETE_RECIPE_SIZES_SUCCESS]: setRecipeSizeAsDirty,
-  [DELETE_RECIPE_CATEGORY_SUCCESS]: setRecipeSizeAsDirty
+  [DELETE_RECIPE_CATEGORY_SUCCESS]: setRecipeSizeAsDirty,
+  [SET_AS_DIRTY]: setRecipeSizeAsDirty
 }
 
 const RECIPE_PRICE_INITIAL_STATE = {dirty: false, all: [], loading: false, error: null}
@@ -78,6 +86,7 @@ export default reducer
 
 export const actions = {
   fetchRecipePrices,
+  setAsDirty,
   resetDirty,
   updateRecipePrice
 }

@@ -1,5 +1,5 @@
 class CentsFormatter {
-  constructor(delimiter, precision, separator, unit) {
+  constructor (delimiter, precision, separator, unit) {
     this.unit = unit
     this.separator = separator
     this.delimiter = delimiter
@@ -13,9 +13,9 @@ class CentsFormatter {
     }
 
     return result
-}
+  }
 
-  format(cents) {
+  format (cents) {
     const minChars = '00'.length + this.precision
 
     let result = `${cents}`

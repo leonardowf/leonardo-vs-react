@@ -11,10 +11,6 @@ export default class SizesView extends Component {
         <SizesList />
         <CategoriesList />
         <CategorySizePriceList />
-        <div className='sizes-container'>
-          <button>Salvar</button>
-          <button>Descartar alterações</button>
-        </div>
       </div>
     )
   }
