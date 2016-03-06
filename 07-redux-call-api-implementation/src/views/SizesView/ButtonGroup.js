@@ -2,6 +2,13 @@ import React, { PropTypes, Component } from 'react'
 import classes from './ButtonGroup.scss'
 
 class ButtonGroup extends Component {
+  propTypes = {
+    onChange: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    buttons: PropTypes.array.isRequired,
+    selected: PropTypes.object.isRequired
+  };
+
   constructor (props) {
     super(props)
 
@@ -14,11 +21,11 @@ class ButtonGroup extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-      if (nextProps.selected) {
-        this.setState({
-          selected: nextProps.selected
-        })
-      }
+    if (nextProps.selected) {
+      this.setState({
+        selected: nextProps.selected
+      })
+    }
   }
 
   renderButtons () {
@@ -30,7 +37,7 @@ class ButtonGroup extends Component {
             type='radio' name={this.props.name}
             value={button.type}
             onChange={() => this.props.onChange(button)}
-          />
+            />
 
           <span className={classes['button-group-item']}>{button.name}</span>
         </label>

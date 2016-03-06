@@ -20,7 +20,7 @@
   .button-discard-changes { margin-top: 10px; @include shift(6); @include span-columns(3); }
   .button-save-changes { margin-top: 10px; @include span-columns(3); }
 
-  input#adjust-price {
+  #adjust-price-input input {
     @include span-columns(3);
     height: 44px;
     position: relative;

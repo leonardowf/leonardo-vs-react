@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { actions as recipePricesActions } from '../../redux/modules/recipePrice'
 import PriceRow from './PriceRow'
-import ButtonGroup from './ButtonGroup'
+import ReadjustPriceView from './ReadjustPriceView'
 
 class CategorySizePriceList extends Component {
   static propTypes = {
@@ -17,38 +17,10 @@ class CategorySizePriceList extends Component {
   constructor (props) {
     super(props)
 
-    this.adjustPriceButtons = [
-      {
-        type: '+',
-        name: 'Adicionar'
-      },
-      {
-        type: '-',
-        name: 'Subtrair'
-      }
-    ]
-
-    this.adjustPriceModes = [
-      {
-        type: '%',
-        name: '%'
-      },
-      {
-        type: '$',
-        name: 'R$'
-      }
-    ]
-
-    this.state = {
-      selectedAdjustPriceButton: this.adjustPriceButtons[1],
-      selectedAdjustPriceMode: this.adjustPriceModes[0]
-    }
-
     this.recipePricesRows = this.recipePricesRows.bind(this)
     this.onSubmitRecipePrice = this.onSubmitRecipePrice.bind(this)
     this.onClickDiscardChanges = this.onClickDiscardChanges.bind(this)
-    this.onAdjustPriceButtonSelected = this.onAdjustPriceButtonSelected.bind(this)
-    this.onAdjustPriceModeSelected = this.onAdjustPriceModeSelected.bind(this)
+    this.onNewPricesApplied = this.onNewPricesApplied.bind(this)
   }
 
   componentWillMount () {
@@ -95,16 +67,8 @@ class CategorySizePriceList extends Component {
     this.props.setAsDirty()
   }
 
-  onAdjustPriceButtonSelected(button) {
-    this.setState({
-      selectedAdjustPriceButton: button
-    })
-  }
-
-  onAdjustPriceModeSelected(button) {
-    this.setState({
-      selectedAdjustPriceMode: button
-    })
+  onNewPricesApplied () {
+    this.forceUpdate()
   }
 
   render () {
@@ -113,34 +77,10 @@ class CategorySizePriceList extends Component {
         <h1>Categorias x Tamanho e Preço</h1>
         <p>Crie os tamanhos personalizados da sua pizzaria.</p>
 
-        <div>
-          <div className='button-group-container'>
-            <form>
-              <ButtonGroup
-                buttons={this.adjustPriceButtons}
-                selected={this.state.selectedAdjustPriceButton}
-                onChange={this.onAdjustPriceButtonSelected}
-                name='adjust-price-button'
-                />
-
-                <input id='adjust-price'></input>
-
-                <div className='adjust-price-mode'>
-                  <ButtonGroup
-                    buttons={this.adjustPriceModes}
-                    selected={this.state.selectedAdjustPriceMode}
-                    onChange={this.onAdjustPriceModeSelected}
-                    name='adjust-price-mode'
-                    />
-                </div>
-
-                <button id='adjust-price'>Aplicar</button>
-            </form>
-
-
-          </div>
-
-        </div>
+        <ReadjustPriceView
+          recipePrices={this.props.recipePrices}
+          onApply={this.onNewPricesApplied}
+          />
 
         <div className='table-container'>
           <table>
