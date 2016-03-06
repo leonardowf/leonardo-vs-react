@@ -2,33 +2,46 @@ import React, { PropTypes, Component } from 'react'
 import classes from './ButtonGroup.scss'
 
 class ButtonGroup extends Component {
-  // static propTypes = {
-  //
-  // };
-
   constructor (props) {
     super(props)
+
+    this.state = {
+      buttons: this.props.buttons,
+      selected: this.props.selected
+    }
+
+    this.renderButtons = this.renderButtons.bind(this)
+  }
+
+  componentWillReceiveProps (nextProps) {
+      if (nextProps.selected) {
+        this.setState({
+          selected: nextProps.selected
+        })
+      }
+  }
+
+  renderButtons () {
+    return this.state.buttons.map((button) => {
+      return (
+        <label key={button.type}>
+          <input
+            checked={this.state.selected.type === button.type}
+            type='radio' name={this.props.name}
+            value={button.type}
+            onChange={() => this.props.onChange(button)}
+          />
+
+          <span className={classes['button-group-item']}>{button.name}</span>
+        </label>
+      )
+    })
   }
 
   render () {
     return (
       <div className={classes['button-group']}>
-        <label>
-          <input type="radio" name='button-group' value='item'></input>
-          <span className={classes['button-group-item']}>Item</span>
-        </label>
-        <label>
-          <input type='radio' name='button-group' value='other-item'></input>
-          <span className={classes['button-group-item']}>Other But Longer Item</span>
-        </label>
-        <label>
-          <input type='radio' name='button-group' value='other-item'></input>
-          <span className={classes['button-group-item']}>Third</span>
-        </label>
-        <label>
-          <input type='radio' name='button-group' value='third'></input>
-          <span className={classes['button-group-item']}>Last Item</span>
-        </label>
+        {this.renderButtons()}
       </div>
     )
   }
